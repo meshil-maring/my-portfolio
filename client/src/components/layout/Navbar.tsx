@@ -8,8 +8,10 @@ import { useTheme } from "./ThemeProvider";
 import { Container } from "./Container";
 
 export function Navbar() {
-  const { theme, toggle } = useTheme();
+  const { theme, toggle, mounted } = useTheme();
   const [open, setOpen] = useState(false);
+  // Render the server-matching icon until the client theme has synced.
+  const themeIcon = !mounted || theme !== "dark" ? <Moon size={18} /> : <Sun size={18} />;
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[#07110D]/95 text-[#EDF5EE] backdrop-blur">
@@ -41,7 +43,7 @@ export function Navbar() {
                 aria-label="Toggle theme"
                 className="rounded-btn p-2 text-[#C4D6C9] transition-colors hover:bg-white/10 hover:text-white"
               >
-                {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+                {themeIcon}
               </button>
             </li>
           </ul>
@@ -52,7 +54,7 @@ export function Navbar() {
               aria-label="Toggle theme"
               className="rounded-btn p-2 text-[#C4D6C9] hover:bg-white/10"
             >
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+              {themeIcon}
             </button>
             <button
               onClick={() => setOpen((o) => !o)}

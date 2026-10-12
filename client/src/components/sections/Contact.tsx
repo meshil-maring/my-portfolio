@@ -10,7 +10,7 @@ const icons: Record<string, React.ComponentType<{ size?: number }>> = {
 
 export function Contact() {
   return (
-    <Section id="contact" number="05" label="Contact" title={<span className="sr-only">Contact</span>}>
+    <Section id="contact" number="06" label="Contact" title={<span className="sr-only">Contact</span>}>
       <Reveal>
         <div className="rounded-card border border-border bg-soft px-5 py-8 text-center md:px-8">
           <Container className="max-w-[640px]">

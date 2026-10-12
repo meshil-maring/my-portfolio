@@ -5,9 +5,10 @@ import { Projects } from "@/components/sections/Projects";
 import { Services } from "@/components/sections/Services";
 import { Skills } from "@/components/sections/Skills";
 import { About } from "@/components/sections/About";
+import { Process } from "@/components/sections/Process";
 import { Contact } from "@/components/sections/Contact";
 
-// design-system §07 §19: nav → hero → work → services → skills → about → contact → footer
+// design-system §07 §19: nav → hero → work → services → skills → about → process → contact → footer
 export default function Home() {
   return (
     <div className="flex min-h-full flex-col">
@@ -18,6 +19,7 @@ export default function Home() {
         <Services />
         <Skills />
         <About />
+        <Process />
         <Contact />
       </main>
       <Footer />

@@ -7,6 +7,7 @@ type Theme = "light" | "dark";
 interface ThemeContextValue {
   theme: Theme;
   toggle: () => void;
+  mounted: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
@@ -19,15 +20,30 @@ function getInitialTheme(): Theme {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  // Hydration-safe: constant initial state so server HTML and the first client
+  // render always agree ("light" → Moon icon). The real theme (localStorage /
+  // media query) syncs in the mount effect below — the one-frame icon swap for
+  // dark-mode users is invisible (no layout shift) and matches next-themes.
+  const [theme, setTheme] = useState<Theme>("light");
+  const [mounted, setMounted] = useState(false);
+
+  // Intentional post-hydration sync: the server has no access to
+  // localStorage / media query, so the real theme can only load on mount.
+  useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
+    setTheme(getInitialTheme());
+    setMounted(true);
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, []);
 
   useEffect(() => {
+    if (!mounted) return;
     document.documentElement.classList.toggle("dark", theme === "dark");
     window.localStorage.setItem("theme", theme);
-  }, [theme]);
+  }, [theme, mounted]);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggle: () => setTheme((t) => (t === "dark" ? "light" : "dark")) }}>
+    <ThemeContext.Provider value={{ theme, toggle: () => setTheme((t) => (t === "dark" ? "light" : "dark")), mounted }}>
       {children}
     </ThemeContext.Provider>
   );

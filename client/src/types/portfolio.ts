@@ -26,6 +26,13 @@ export interface Service {
   icon: string;
 }
 
+export interface ProcessStep {
+  n: string;
+  title: string;
+  description: string;
+  icon: string;
+}
+
 export interface SkillGroup {
   label: string;
   skills: string[];

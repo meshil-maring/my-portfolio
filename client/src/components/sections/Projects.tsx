@@ -1,6 +1,22 @@
+import { CircleArrowOutUpRight, LayoutGrid } from "lucide-react";
 import { projects } from "@/data/projects";
 import { Container } from "@/components/layout/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { GlassNumber } from "@/components/ui/GlassNumber";
+
+// Corner mark — lucide "circle-arrow-out-up-right" in warm yellow (#EFC65C)
+// that complements the deep-green panel + mint accents.
+function CornerArrow({ label }: { label: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      title={label}
+      className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-[#EFC65C]/35 bg-[#07110D]/85 text-[#EFC65C] shadow-[0_8px_24px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[#EFC65C]/60 group-hover:text-[#F6D47E]"
+    >
+      <CircleArrowOutUpRight size={18} strokeWidth={2} />
+    </span>
+  );
+}
 
 // Selected work — dark panel matching hero: eyebrow + headline,
 // featured case-study row, 2-card grid, disclaimer footnote.
@@ -11,9 +27,12 @@ export function Projects() {
     <section id="work" className="scroll-mt-20 bg-[#07110D] py-14 text-[#EDF5EE] md:py-16 lg:py-20">
       <Container>
         <Reveal>
-          <p className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#B9F4CA]">
-            01 / Portfolio
-          </p>
+          <div className="flex items-center gap-3">
+            <GlassNumber number="01" tone="on-dark" icon={<LayoutGrid size={18} />} />
+            <p className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#B9F4CA]">
+              Portfolio
+            </p>
+          </div>
           <h2 className="mt-3 text-[32px] font-extrabold leading-none tracking-[-0.02em] text-white sm:text-[38px]">
             Selected <span className="text-[#B9F4CA]">work.</span>
           </h2>
@@ -21,7 +40,8 @@ export function Projects() {
 
         {featured && (
           <Reveal delay={0.08}>
-            <article className="mt-8 grid gap-0 overflow-hidden rounded-2xl border border-white/10 bg-[#0C1A12] md:grid-cols-[42%_58%]">
+            <article className="group relative mt-8 grid gap-0 overflow-hidden rounded-2xl border border-white/10 bg-[#0C1A12] md:grid-cols-[42%_58%]">
+              <CornerArrow label={featured.title} />
               <div className="flex items-center justify-center bg-[#DDE9DC] p-6 sm:p-8">
                 <div className="w-full max-w-[300px] rotate-[-2deg] overflow-hidden rounded-xl bg-white shadow-[0_16px_40px_rgba(10,30,20,0.25)]">
                   <div className="flex items-center justify-between bg-[#2F6B4F] px-4 py-2.5 text-[12px] font-bold text-white">
@@ -70,7 +90,8 @@ export function Projects() {
         <div className="mt-5 grid gap-5 md:grid-cols-2">
           {rest.map((p, i) => (
             <Reveal key={p.slug} delay={0.06 * i}>
-              <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0C1A12]">
+              <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0C1A12]">
+                <CornerArrow label={p.title} />
                 <div className={p.slug === "projectg" ? "flex h-[190px] items-center justify-center overflow-hidden bg-[#E7E7D8] p-6" : "flex h-[190px] items-center justify-center overflow-hidden bg-[#E4EAF2] p-6"}>
                   <div className="w-full max-w-[290px] rotate-[-3deg] overflow-hidden rounded-lg bg-white shadow-[0_12px_30px_rgba(10,30,60,0.22)]">
                     {p.slug === "projectg" ? (
