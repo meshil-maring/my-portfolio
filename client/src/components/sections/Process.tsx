@@ -15,14 +15,15 @@ export function Process() {
       label="How I Work"
       title={<>From idea to <span className="text-accent">launch.</span></>}
       icon={<Workflow size={18} />}
+      titleClassName="text-[22px] lg:text-[26px]"
     >
       <Reveal>
-        <p className="max-w-[62ch] text-[15px] leading-[1.7] text-muted">
+        <p className="max-w-[62ch] text-[13.5px] leading-[1.65] text-muted">
           From understanding the problem to launching a complete solution — six focused phases.
         </p>
       </Reveal>
 
-      <ol className="relative mx-auto mt-10 max-w-5xl space-y-8 md:mt-14 md:space-y-12">
+      <ol className="relative mx-auto mt-8 max-w-5xl space-y-6 md:mt-12 md:space-y-9">
         {/* single center spine — all icons sit on this line */}
         <span
           aria-hidden

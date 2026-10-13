@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import { hero } from "@/data/site";
 import { Container } from "@/components/layout/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { HeroCodeCard } from "@/components/sections/HeroCodeCard";
 
 // Full-screen hero matching reference: deep-green panel, big
 // headline, tilted code card, bottom capability strip.
@@ -66,39 +67,7 @@ export function Hero() {
             </Reveal>
           </div>
           <Reveal delay={0.2} className="hidden justify-center lg:flex">
-            <div className="relative flex justify-center py-8">
-              <div
-                aria-hidden
-                className="absolute left-1/2 top-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-white/15"
-              />
-              <div className="relative w-[300px] rotate-[6deg] rounded-2xl border border-white/10 bg-[#0C1A12]/95 p-5 shadow-[0_24px_60px_rgba(0,0,0,0.5)]">
-                <div aria-hidden className="flex items-center gap-1.5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
-                </div>
-                <div className="mt-4 font-mono text-[13px] leading-[1.9] text-[#9FD8AE]">
-                  <p>
-                    <span className="text-[#6EE7A0]">const</span>{" "}
-                    <span className="text-white">meshil</span> = {"{"}
-                  </p>
-                  <p className="pl-4">
-                    role: <span className="text-[#D9F7E2]">&quot;Engineer&quot;</span>,
-                  </p>
-                  <p className="pl-4">
-                    skills: <span className="text-[#D9F7E2]">[&quot;Web&quot;, &quot;AI&quot;]</span>,
-                  </p>
-                  <p className="pl-4">
-                    focus: <span className="text-[#D9F7E2]">&quot;Build&quot;</span>
-                  </p>
-                  <p>{"};"}</p>
-                </div>
-                <div className="mt-4 flex items-center gap-1.5 border-t border-white/10 pt-3 text-[12px] text-[#8FA89A]">
-                  <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-[#8FA89A]" />
-                  Ready to build
-                </div>
-              </div>
-            </div>
+            <HeroCodeCard />
           </Reveal>
         </div>
       </Container>

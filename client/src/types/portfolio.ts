@@ -24,6 +24,10 @@ export interface Service {
   title: string;
   description: string;
   icon: string;
+  // Rendered in accent color at the end of the title (e.g. "Applications")
+  accentWord?: string;
+  // Brand-logo tiles shown on the featured layout (keys into BrandIcons)
+  stack?: string[];
 }
 
 export interface ProcessStep {

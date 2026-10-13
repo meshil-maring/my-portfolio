@@ -8,6 +8,8 @@ export const services: Service[] = [
     description:
       "Responsive frontend interfaces, backend services, databases, and complete business workflows.",
     icon: "Code2",
+    accentWord: "Applications",
+    stack: ["react", "nodedotjs", "tailwindcss", "postgresql", "firebase", "mongodb"],
   },
   {
     n: "02",

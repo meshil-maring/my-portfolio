@@ -12,6 +12,8 @@ interface SectionProps {
   className?: string;
   // Lets a section override the frosted-glass glyph (defaults per section number below)
   icon?: React.ReactNode;
+  // Lets a section override the H2 size (merged via twMerge)
+  titleClassName?: string;
 }
 
 // Per-section glyphs: keeps your demo's "connected blocks" idea but uses
@@ -28,7 +30,7 @@ const fallbackIcon = <LayoutGrid size={18} />;
 
 // Shared header: glass-tile number badge + mono label + H2.
 // Replaces the old "02 · Label" eyebrow so 02/03/04/05 all share the motif.
-export function Section({ id, number, label, title, children, className, icon }: SectionProps) {
+export function Section({ id, number, label, title, children, className, icon, titleClassName }: SectionProps) {
   return (
     <section id={id} className={cn("scroll-mt-20 py-7 md:py-[34px] lg:py-10", className)}>
       <Container>
@@ -39,7 +41,7 @@ export function Section({ id, number, label, title, children, className, icon }:
               {label}
             </p>
           </div>
-          <h2 className="mt-2 text-[28px] font-extrabold leading-[1.2] tracking-[-0.03em] lg:text-4xl">
+          <h2 className={cn("mt-2 text-[26px] font-extrabold leading-[1.2] tracking-[-0.03em] lg:text-[32px]", titleClassName)}>
             {title}
           </h2>
         </div>

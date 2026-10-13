@@ -2,6 +2,7 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Compass, PenTool, Database, Code2, ClipboardCheck, Rocket } from "lucide-react";
+import PenWritingIcon from "@/components/ui/animated/PenWritingIcon";
 
 interface CurvedLine {
   text: string;
@@ -36,19 +37,19 @@ interface Metrics {
 function metricsFor(desktop: boolean): Metrics {
   if (!desktop) {
     return {
-      stepSize: 13, stepHeight: 20,
-      headingSize: 22, headingHeight: 26,
-      bodySize: 15, bodyHeight: 22,
-      diameter: 76, gap: 16,
-      stepGap: 0, headingGap: 10, bodyGap: 8,
+      stepSize: 12, stepHeight: 18,
+      headingSize: 17, headingHeight: 21,
+      bodySize: 13, bodyHeight: 19,
+      diameter: 62, gap: 12,
+      stepGap: 0, headingGap: 8, bodyGap: 6,
     };
   }
   return {
-    stepSize: 14, stepHeight: 24,
-    headingSize: 34, headingHeight: 42,
-    bodySize: 19, bodyHeight: 32,
-    diameter: 170, gap: 30,
-    stepGap: 0, headingGap: 12, bodyGap: 10,
+    stepSize: 13, stepHeight: 22,
+    headingSize: 22, headingHeight: 28,
+    bodySize: 15, bodyHeight: 25,
+    diameter: 132, gap: 22,
+    stepGap: 0, headingGap: 10, bodyGap: 8,
   };
 }
 
@@ -110,6 +111,7 @@ export function ProcessStepCurve({
   const [m, setM] = useState<Metrics>(() => metricsFor(true));
   const [mirrored, setMirrored] = useState(false);
   const [desktop, setDesktop] = useState(true);
+  const [penPlay, setPenPlay] = useState(0);
 
   // Track the md breakpoint in JS so icon size / text side matches CSS.
   useEffect(() => {
@@ -175,20 +177,46 @@ export function ProcessStepCurve({
   const showMirror = mirrored && desktop;
 
   return (
-    <div ref={sceneRef} className="relative w-full" style={height ? { height } : undefined}>
+    <div
+      ref={sceneRef}
+      data-icon={icon}
+      className="group relative w-full overflow-x-clip"
+      style={height ? { height } : undefined}
+      onPointerEnter={icon === "PenTool" ? () => setPenPlay((v) => v + 1) : undefined}
+    >
       {/* Icon — pure CSS centering on every breakpoint */}
       <div
         aria-hidden
-        className="absolute left-[38px] top-1/2 grid -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-border bg-surface md:left-1/2"
+        className="absolute left-[38px] top-1/2 grid -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-border bg-surface transition-colors duration-300 group-hover:border-accent/40 md:left-1/2"
         style={{ width: m.diameter, height: m.diameter }}
       >
+        {/* warm accent halo — subtle at rest, blooms + beats on hover */}
         <span
-          className="grid place-items-center rounded-full bg-accent-soft text-accent"
+          aria-hidden
+          className="pointer-events-none absolute -inset-4 rounded-full bg-accent/10 opacity-60 blur-xl group-hover:animate-halo"
+        />
+        {/* concentric ring for depth */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute rounded-full border border-border/70 transition-transform duration-300 group-hover:scale-105"
+          style={{ width: m.diameter * 0.72, height: m.diameter * 0.72 }}
+        />
+        <span
+          className="relative grid place-items-center rounded-full bg-accent-soft text-accent shadow-sm transition-transform duration-300 group-hover:scale-105"
           style={{ width: m.diameter * 0.47, height: m.diameter * 0.47 }}
         >
-          <Icon size={small ? 20 : 28} />
+          {icon === "PenTool" ? (
+            <PenWritingIcon
+              size={Math.round(m.diameter * 0.47)}
+              iconSize={small ? 18 : 24}
+              strokeWidth={2}
+              playKey={penPlay}
+              restartOnHover={false}
+            />
+          ) : (
+            <Icon size={small ? 20 : 28} />
+          )}
         </span>
-        <span aria-hidden className="absolute left-1/2 top-full w-px bg-border" style={{ height: 24, transform: "translateX(-50%)" }} />
       </div>
       <div className="sr-only">
         <p>Step {stepLabel}</p>
@@ -220,7 +248,7 @@ export function ProcessStepCurve({
                     : undefined),
                 }}
               >
-                <span aria-hidden className="shrink-0 rounded-full bg-accent" style={{ width: 7, height: 7 }} />
+                <span aria-hidden className="shrink-0 rounded-full bg-[#EFC65C] shadow-[0_0_0_3px] shadow-[#EFC65C]/15 group-hover:animate-heartbeat" style={{ width: 7, height: 7 }} />
                 <span aria-hidden className="h-px shrink-0 bg-border" style={{ width: small ? 20 : 48 }} />
                 <span className="whitespace-pre">Step {line.text}</span>
               </div>

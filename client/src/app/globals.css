@@ -66,6 +66,141 @@
   --font-mono: var(--font-mono);
 }
 
+/* Heartbeat pulse — Process section step dot + glow on hover */
+@theme {
+  --animate-heartbeat: heartbeat 1.1s ease-in-out infinite;
+  --animate-halo: halo-beat 1.1s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.45); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.2); }
+  70% { transform: scale(1); }
+}
+
+@keyframes halo-beat {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  14% { transform: scale(1.18); opacity: 1; }
+  28% { transform: scale(1); opacity: 0.75; }
+  42% { transform: scale(1.08); opacity: 0.9; }
+  70% { transform: scale(1); opacity: 0.6; }
+}
+
+/* Compass needle — step 01 (Understand) only: the needle swings, overshoots,
+   and settles on north when the step is hovered. The circle (ring) stays put. */
+.group[data-icon="Compass"]:hover svg > path {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  animation: compass-needle 1.6s cubic-bezier(.22, 1, .36, 1) both;
+}
+@keyframes compass-needle {
+  0% { transform: rotate(0deg); }
+  18% { transform: rotate(-35deg); }
+  45% { transform: rotate(105deg); }
+  66% { transform: rotate(-18deg); }
+  82% { transform: rotate(8deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Database stack — step 03 (Develop & Build) only: the top disk dips as data
+   presses in while the middle separator scans down and out, then resets.
+   The body outline stays put. */
+.group[data-icon="Database"]:hover svg > ellipse {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  animation: mesh-database-dip 1.8s cubic-bezier(.22, 1, .36, 1) both;
+}
+.group[data-icon="Database"]:hover svg > path:last-child {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  animation: mesh-database-scan 1.8s cubic-bezier(.55, 0, .45, 1) both;
+}
+@keyframes mesh-database-dip {
+  0% { transform: translateY(0); }
+  30% { transform: translateY(1.2px); }
+  100% { transform: translateY(0); }
+}
+@keyframes mesh-database-scan {
+  0% { transform: translateY(0); opacity: 1; }
+  55% { transform: translateY(7px); opacity: 0; }
+  56% { transform: translateY(0); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Code typing — step 04 (Test & QA) only: the < / > characters pop in one by
+   one, left to right, like code being typed. At rest the full glyph shows. */
+.group[data-icon="Code2"]:hover svg > path {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: mesh-code-type 0.42s cubic-bezier(.22, 1, .36, 1) both;
+}
+/* left-to-right reading order: '<' (2nd child), '/' (3rd child), '>' (1st child) */
+.group[data-icon="Code2"]:hover svg > path:nth-child(2) { animation-delay: 0s; }
+.group[data-icon="Code2"]:hover svg > path:nth-child(3) { animation-delay: 0.28s; }
+.group[data-icon="Code2"]:hover svg > path:nth-child(1) { animation-delay: 0.56s; }
+@keyframes mesh-code-type {
+  0% { opacity: 0; transform: translateY(2px) scale(0.55); }
+  60% { opacity: 1; transform: translateY(0) scale(1.1); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .group[data-icon="Code2"]:hover svg > path { animation: none; opacity: 1; }
+}
+
+/* Clipboard check — step 05 (Test & Refine) only: the board + clip "stamp"
+   down while the checkmark draws itself, reading as "checks passing / verified". */
+.group[data-icon="ClipboardCheck"]:hover svg > rect,
+.group[data-icon="ClipboardCheck"]:hover svg > path:nth-child(2) {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  animation: mesh-clipboard-stamp 1.5s cubic-bezier(.22, 1, .36, 1) both;
+}
+.group[data-icon="ClipboardCheck"]:hover svg > path:nth-child(3) {
+  stroke-dasharray: 12;
+  stroke-dashoffset: 12;
+  animation: mesh-clipboard-draw 1.5s cubic-bezier(.65, 0, .35, 1) both;
+}
+@keyframes mesh-clipboard-stamp {
+  0% { transform: scale(1); }
+  30% { transform: scale(0.9); }
+  55% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+@keyframes mesh-clipboard-draw {
+  0%, 20% { stroke-dashoffset: 12; }
+  70%, 100% { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .group[data-icon="ClipboardCheck"]:hover svg > rect,
+  .group[data-icon="ClipboardCheck"]:hover svg > path {
+    animation: none;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Rocket launch — step 06 (Deploy & Improve) only: the rocket smoothly
+   launches toward the top-right corner, shrinking and fading as it flies off
+   into the distance, then returns to its default resting state on the pad. */
+.group[data-icon="Rocket"]:hover svg > path {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  animation: mesh-rocket-launch 1.6s cubic-bezier(0.5, 0, 0.75, 0) both;
+}
+@keyframes mesh-rocket-launch {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  45% { transform: translate(10px, -11px) scale(0.1); opacity: 0; }
+  70% { transform: translate(10px, -11px) scale(0.1); opacity: 0; }
+  71% { transform: translate(0, 0) scale(1); opacity: 0; animation-timing-function: ease-out; }
+  100% { transform: translate(0, 0) scale(1); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .group[data-icon="Rocket"]:hover svg > path { animation: none; }
+}
+
 @media (max-width: 1024px) {
   :root {
     --page-gutter: 32px;
@@ -89,6 +224,60 @@ body {
   color: var(--color-text);
   font-family: var(--font-sans);
   transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* ——— Custom circular "glass" cursor (see components/ui/Cursor.tsx) ——— */
+/* Only hide the native cursor once JS confirms a fine pointer + activates. */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+/* Keep the I-beam over text fields. */
+html.has-custom-cursor input,
+html.has-custom-cursor textarea {
+  cursor: text !important;
+}
+
+.cursor-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  opacity: 0;
+  background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+  backdrop-filter: blur(3px) saturate(140%);
+  -webkit-backdrop-filter: blur(3px) saturate(140%);
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--color-accent) 20%, transparent);
+  transition: width var(--transition-fast), height var(--transition-fast),
+    background-color var(--transition-fast), border-color var(--transition-fast),
+    opacity 200ms ease;
+  will-change: transform;
+}
+.cursor-ring[data-active="true"] {
+  width: 60px;
+  height: 60px;
+  background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+  border-color: color-mix(in srgb, var(--color-accent) 75%, transparent);
+}
+.cursor-ring[data-down="true"] {
+  width: 26px;
+  height: 26px;
+}
+
+.cursor-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  opacity: 0;
+  transition: opacity 200ms ease;
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {

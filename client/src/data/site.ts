@@ -27,6 +27,21 @@ export const hero = {
   secondaryCta: { label: "Work With Me", href: "#contact" },
 };
 
+// Contact links shown on the BACK face of the hero code card (flip on click).
+// `brand` keys into the brand-logo registry (components/ui/BrandIcons.tsx).
+// TODO(owner): replace hrefs with verified URLs before launch.
+export const heroContact = {
+  title: "Let's connect",
+  hint: "Ready to build",
+  links: [
+    { label: "GitHub", brand: "github", href: "https://github.com/meshil-maring" },
+    { label: "LinkedIn", brand: "linkedin", href: "https://linkedin.com/in/your-handle" },
+    { label: "Instagram", brand: "instagram", href: "https://instagram.com/your-handle" },
+    { label: "WhatsApp", brand: "whatsapp", href: "https://wa.me/0000000000" },
+  ],
+} as const;
+
+
 export const about = {
   body: "I'm a Computer Science Engineering student specializing in Data Science and Machine Learning, with hands-on experience building full-stack applications, backend systems, and AI-powered solutions. I enjoy solving practical problems, creating scalable architectures, and turning ambitious ideas into dependable products.",
   education: {
