@@ -1,4 +1,4 @@
-# 03 — Spacing (v1.0 LOCKED)
+# 03 — Spacing (v1.1 LOCKED)
 
 4px base. Compact, premium, no dead gaps. No section gets `min-h-100vh` by default.
 

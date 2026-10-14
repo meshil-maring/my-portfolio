@@ -1,6 +1,6 @@
 import type { SkillGroup } from "@/types/portfolio";
 
-// design-system v1.0 §11 — grouped tags, no percentages
+// design-system v1.1 §11 — grouped tags, no percentages
 export const skillGroups: SkillGroup[] = [
   {
     label: "Frontend Development",

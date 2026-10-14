@@ -1,4 +1,4 @@
-# 01 — Colors (v1.0 LOCKED)
+# 01 — Colors (v1.1 LOCKED)
 
 Default theme: **light**. Toggle persists; respect saved > system > light default. No flash of wrong theme.
 

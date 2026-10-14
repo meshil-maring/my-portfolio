@@ -34,14 +34,38 @@ interface Metrics {
   bodyGap: number;
 }
 
-function metricsFor(desktop: boolean): Metrics {
-  if (!desktop) {
+// Layout tier mirrors Tailwind's md (768px) / lg (1024px) breakpoints so
+// JS metrics, anchors and mirroring always agree with the CSS spine
+// (md:left-1/2). Driven by the *viewport*, never by container width —
+// a 704px container at a 768px viewport is still the md layout.
+type Tier = "mobile" | "tablet" | "desktop";
+
+function tierFor(viewport: number): Tier {
+  if (viewport < 768) return "mobile";
+  if (viewport < 1024) return "tablet";
+  return "desktop";
+}
+
+function metricsFor(tier: Tier): Metrics {
+  if (tier === "mobile") {
     return {
       stepSize: 12, stepHeight: 18,
       headingSize: 17, headingHeight: 21,
       bodySize: 13, bodyHeight: 19,
       diameter: 62, gap: 12,
       stepGap: 0, headingGap: 8, bodyGap: 6,
+    };
+  }
+  if (tier === "tablet") {
+    // Tablet (768-1023): centred spine like desktop, but a tighter circle
+    // and type scale so a text column (~half the container, ~258px here)
+    // wraps instead of running past the right edge.
+    return {
+      stepSize: 12, stepHeight: 20,
+      headingSize: 19, headingHeight: 25,
+      bodySize: 14, bodyHeight: 23,
+      diameter: 104, gap: 18,
+      stepGap: 0, headingGap: 8, bodyGap: 7,
     };
   }
   return {
@@ -108,18 +132,18 @@ export function ProcessStepCurve({
   const sceneRef = useRef<HTMLDivElement>(null);
   const [lines, setLines] = useState<CurvedLine[]>([]);
   const [height, setHeight] = useState<number | null>(null);
-  const [m, setM] = useState<Metrics>(() => metricsFor(true));
+  const [m, setM] = useState<Metrics>(() => metricsFor("desktop"));
   const [mirrored, setMirrored] = useState(false);
-  const [desktop, setDesktop] = useState(true);
+  const [tier, setTier] = useState<Tier>("desktop");
   const [penPlay, setPenPlay] = useState(0);
 
-  // Track the md breakpoint in JS so icon size / text side matches CSS.
+  // Track the viewport tier (md / lg) so icon size, anchors and text side
+  // stay in sync with the CSS spine even when no resize event fires.
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-    const sync = () => setDesktop(mq.matches);
+    const sync = () => setTier(tierFor(window.innerWidth));
     sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
+    window.addEventListener("resize", sync);
+    return () => window.removeEventListener("resize", sync);
   }, []);
 
   useLayoutEffect(() => {
@@ -128,19 +152,23 @@ export function ProcessStepCurve({
     const render = () => {
       const width = scene.clientWidth;
       if (!width) return;
-      const isDesktop = width >= 768;
-      const mm = metricsFor(isDesktop);
-      const effMirror = mirror && isDesktop;
+      // Tier follows the *viewport* (Tailwind md/lg), not the container
+      // width: at a 768px viewport the container is ~704px, and reading
+      // that as "mobile" used to combine a centred CSS spine with rail
+      // metrics — text then started at 50% with a full-width wrap and clipped.
+      const t = tierFor(window.innerWidth);
+      const mm = metricsFor(t);
+      const centered = t !== "mobile";
+      const effMirror = mirror && centered;
       const radius = mm.diameter / 2 + mm.gap;
-      const cx = isDesktop ? width / 2 : mm.diameter / 2 + 2;
+      // Text anchor: the CSS spine (md:left-1/2) or the mobile rail (left-[38px]).
+      const anchor = centered ? width / 2 : 38;
       const sans = "Inter, system-ui, sans-serif";
-      const avail = isDesktop
-        ? Math.max(40, width / 2 - radius - 24)
-        : Math.max(40, width - cx - radius - 8);
+      const avail = Math.max(40, width - anchor - radius - (centered ? 24 : 12));
       const rows: { text: string; kind: CurvedLine["kind"]; h: number; g: number }[] = [
         { text: stepLabel.trim(), kind: "step", h: mm.stepHeight, g: mm.stepGap },
       ];
-      wrapText(title, `700 ${mm.headingSize}px ${sans}`, avail).forEach((t) =>
+      wrapText(title, `800 ${mm.headingSize}px ${sans}`, avail).forEach((t) =>
         rows.push({ text: t, kind: "heading", h: mm.headingHeight, g: mm.headingGap }),
       );
       wrapText(description, `400 ${mm.bodySize}px ${sans}`, avail).forEach((t, idx) =>
@@ -160,6 +188,7 @@ export function ProcessStepCurve({
       });
       setM(mm);
       setMirrored(effMirror);
+      setTier(t);
       setHeight(h);
       setLines(next);
     };
@@ -168,13 +197,18 @@ export function ProcessStepCurve({
     ro.observe(scene);
     document.fonts?.ready.then(render).catch(() => undefined);
     return () => ro.disconnect();
-  }, [stepLabel, title, description, mirror]);
+  }, [stepLabel, title, description, mirror, tier]);
 
   // Icon + spine + text all anchor to the same CSS center, so the
   // circle can never drift off the line. No pixel left/right from JS.
-  const small = !desktop;
+  const small = tier === "mobile";
+  const centered = tier !== "mobile";
+  const stepRuleGap = small ? 8 : tier === "tablet" ? 10 : 12;
+  const stepRuleWidth = small ? 20 : tier === "tablet" ? 32 : 48;
+  const glyphSize = small ? 20 : tier === "tablet" ? 24 : 28;
+  const penGlyphSize = small ? 18 : tier === "tablet" ? 22 : 24;
   const Icon = curveIcons[icon] ?? Code2;
-  const showMirror = mirrored && desktop;
+  const showMirror = mirrored && centered;
 
   return (
     <div
@@ -208,13 +242,13 @@ export function ProcessStepCurve({
           {icon === "PenTool" ? (
             <PenWritingIcon
               size={Math.round(m.diameter * 0.47)}
-              iconSize={small ? 18 : 24}
+              iconSize={penGlyphSize}
               strokeWidth={2}
               playKey={penPlay}
               restartOnHover={false}
             />
           ) : (
-            <Icon size={small ? 20 : 28} />
+            <Icon size={glyphSize} />
           )}
         </span>
       </div>
@@ -229,7 +263,7 @@ export function ProcessStepCurve({
           // Anchor text edges to the spine via calc(50% + curve) so they
           // stay glued to the CSS-centered circle at any container width.
           // Mobile rail uses the same 38px anchor as the icon + spine.
-          const pos = desktop
+          const pos = centered
             ? isMirror
               ? { right: `calc(50% + ${line.curve.toFixed(1)}px)` }
               : { left: `calc(50% + ${line.curve.toFixed(1)}px)` }
@@ -241,15 +275,15 @@ export function ProcessStepCurve({
                 className="absolute flex items-center font-mono font-medium italic text-faint"
                 style={{
                   top: line.top, height: line.height, fontSize: m.stepSize,
-                  lineHeight: `${line.height}px`, gap: small ? 8 : 12,
+                  lineHeight: `${line.height}px`, gap: stepRuleGap,
                   ...pos,
-                  ...(isMirror && desktop
+                  ...(isMirror && centered
                     ? { flexDirection: "row-reverse" as const, textAlign: "right" as const }
                     : undefined),
                 }}
               >
                 <span aria-hidden className="shrink-0 rounded-full bg-[#EFC65C] shadow-[0_0_0_3px] shadow-[#EFC65C]/15 group-hover:animate-heartbeat" style={{ width: 7, height: 7 }} />
-                <span aria-hidden className="h-px shrink-0 bg-border" style={{ width: small ? 20 : 48 }} />
+                <span aria-hidden className="h-px shrink-0 bg-border" style={{ width: stepRuleWidth }} />
                 <span className="whitespace-pre">Step {line.text}</span>
               </div>
             );

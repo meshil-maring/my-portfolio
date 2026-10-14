@@ -1,6 +1,6 @@
 import type { Service } from "@/types/portfolio";
 
-// design-system v1.0 §07 §10
+// design-system v1.1 §07 §10
 export const services: Service[] = [
   {
     n: "01",
@@ -17,6 +17,10 @@ export const services: Service[] = [
     description:
       "Document-aware assistants, semantic search, LLM integrations, and intelligent retrieval workflows.",
     icon: "BrainCircuit",
+    // Featured-panel fields (same treatment as 01): accent word at the end of
+    // the title + BrandIcons keys for the floating desktop/mobile stack tiles.
+    accentWord: "Solutions",
+    stack: ["python", "fastapi", "huggingface", "postgresql", "supabase", "react"],
   },
   {
     n: "03",
@@ -24,6 +28,10 @@ export const services: Service[] = [
     description:
       "REST APIs, secure authentication, role-based authorization, database integration, and multi-tenant architecture.",
     icon: "Server",
+    // Featured-panel fields (same treatment as 01): accent word at the end of
+    // the title + BrandIcons keys for the floating desktop/mobile stack tiles.
+    accentWord: "Development",
+    stack: ["nodedotjs", "python", "fastapi", "docker", "postgresql", "supabase"],
   },
   {
     n: "04",
@@ -31,5 +39,9 @@ export const services: Service[] = [
     description:
       "Custom admin dashboards, content management systems, media workflows, and operational interfaces.",
     icon: "LayoutDashboard",
+    // Featured-panel fields (same treatment as 01): accent word at the end of
+    // the title + BrandIcons keys for the floating desktop/mobile stack tiles.
+    accentWord: "Platforms",
+    stack: ["react", "tailwindcss", "postgresql", "supabase", "mongodb", "firebase"],
   },
 ];

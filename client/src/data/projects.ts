@@ -1,6 +1,6 @@
 import type { Project } from "@/types/portfolio";
 
-// design-system v1.0 §07 + §10 — real projects only, honest statuses
+// design-system v1.1 §07 + §10 — real projects only, honest statuses
 export const projects: Project[] = [
   {
     slug: "college-ai-assistant",

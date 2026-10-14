@@ -1,4 +1,4 @@
-# 10 — Content Model (v1.0 LOCKED)
+# 10 — Content Model (v1.1 LOCKED)
 
 Every section maps to typed data in `src/data/` + types in `src/types/portfolio.ts`. No hard-coded lists in components.
 
@@ -23,7 +23,7 @@ v1 rows: `college-ai-assistant` (In Progress, React/TS/Python/FastAPI/RAG/Postgr
 
 ## Services (`data/services.ts`)
 
-`{ n: '01'..'04', title, description, icon: 'Code2'|'BrainCircuit'|'Server'|'LayoutDashboard' }` — Full-Stack / AI&RAG / Backend&APIs / Dashboards&CMS.
+`{ n: '01'..'04', title, description, icon: 'Code2'|'BrainCircuit'|'Server'|'LayoutDashboard', accentWord?, stack? }` — Full-Stack / AI&RAG / Backend&APIs / Dashboards&CMS. `accentWord` (end-of-title accent) + `stack` (BrandIcons keys) feed the featured panel; all rows 01–04 render as featured panels (§07, proposal 2026-10-14).
 
 ## Skills (`data/skills.ts`)
 

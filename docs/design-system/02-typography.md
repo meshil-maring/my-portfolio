@@ -1,4 +1,4 @@
-# 02 — Typography (v1.0 LOCKED)
+# 02 — Typography (v1.1 LOCKED)
 
 ## Families (max 2)
 

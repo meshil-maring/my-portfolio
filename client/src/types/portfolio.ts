@@ -1,4 +1,4 @@
-// Shared portfolio domain types — design-system v1.0 §10
+// Shared portfolio domain types — design-system v1.1 §10
 // Runtime-free: types only. See docs/typescript/02-type-conventions.md
 
 export type ProjectStatus = "Live" | "In Progress";

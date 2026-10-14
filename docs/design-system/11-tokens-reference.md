@@ -1,4 +1,4 @@
-# 11 — Tokens Reference (v1.0, copy-paste)
+# 11 — Tokens Reference (v1.1, copy-paste)
 
 ## CSS variables
 

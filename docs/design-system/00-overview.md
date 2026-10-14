@@ -1,4 +1,4 @@
-# Design System v1.0 — DS Meshil Maring Portfolio
+# Design System v1.1 — DS Meshil Maring Portfolio
 
 > **Status:** LOCKED for v1 build. **Personality:** Minimalist, Modern, Professional, Developer-Focused, Editorial.
 > **Audience:** Recruiters, hiring managers, freelance clients, startups.
@@ -23,8 +23,8 @@
 
 ## Version
 
-- Current: **v1.0** (this spec, locked).
-- Next candidate: v1.1 (TBD via proposals).
+- Current: **v1.2** (this spec, locked).
+- Next candidate: v1.3 (TBD via proposals).
 
 ## Map to code
 

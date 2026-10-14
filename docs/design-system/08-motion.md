@@ -1,4 +1,4 @@
-# 08 — Motion (v1.0 LOCKED)
+# 08 — Motion (v1.1 LOCKED)
 
 Subtle, meaningful, GPU-only (opacity/transform). Respect `prefers-reduced-motion` — render statically when set.
 

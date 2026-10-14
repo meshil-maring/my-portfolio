@@ -1,4 +1,4 @@
-# 06 — Navigation (v1.0 LOCKED)
+# 06 — Navigation (v1.1 LOCKED)
 
 ## Desktop (72px)
 

@@ -1,4 +1,4 @@
-# 04 — Grid & Layout (v1.0 LOCKED)
+# 04 — Grid & Layout (v1.1 LOCKED)
 
 ## Breakpoints
 

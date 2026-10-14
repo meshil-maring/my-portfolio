@@ -7,6 +7,8 @@ import { ProcessStepCurve } from "./ProcessStepCurve";
 // How I Work — 05: all icons centered on a single spine,
 // text alternates right / left wrapping around each icon.
 // Mobile: left rail, all text on the right.
+// Tablet (768-1023): same centred spine, tighter circle + type scale —
+// the tier is resolved from the viewport in ProcessStepCurve (mirrors md/lg).
 export function Process() {
   return (
     <Section

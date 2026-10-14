@@ -46,7 +46,7 @@ export function HeroCodeCard() {
       {/* Dashed orbit ring — very slow spin behind the card */}
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-white/15"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-accent/30 dark:border-white/15"
         animate={reduce ? undefined : { rotate: 360 }}
         transition={reduce ? undefined : { duration: 60, repeat: Infinity, ease: "linear" }}
       />
@@ -83,7 +83,7 @@ export function HeroCodeCard() {
               aria-hidden={flipped}
               aria-label="Flip card to reveal contact links"
               className={cn(
-                "group block w-[300px] rounded-2xl border border-white/10 bg-[#0C1A12]/95 p-5 text-left shadow-[0_24px_60px_rgba(0,0,0,0.5)] outline-none [backface-visibility:hidden] focus-visible:ring-2 focus-visible:ring-[#6EE7A0]",
+                "group block w-[300px] rounded-2xl border border-border bg-surface p-5 text-left shadow-[var(--shadow-card)] transition-colors duration-200 dark:border-white/10 dark:bg-[#0C1A12]/95 dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] outline-none [backface-visibility:hidden] focus-visible:ring-2 focus-visible:ring-accent dark:focus-visible:ring-[#6EE7A0]",
                 flipped ? "pointer-events-none" : "pointer-events-auto",
               )}
             >
@@ -92,28 +92,28 @@ export function HeroCodeCard() {
                 <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
                 <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
               </div>
-              <div className="mt-4 font-mono text-[13px] leading-[1.9] text-[#9FD8AE]">
+              <div className="mt-4 font-mono text-[13px] leading-[1.9] text-muted dark:text-[#9FD8AE]">
                 <p>
-                  <span className="text-[#6EE7A0]">const</span>{" "}
-                  <span className="text-white">meshil</span> = {"{"}
+                  <span className="text-accent dark:text-[#6EE7A0]">const</span>{" "}
+                  <span className="text-text dark:text-white">meshil</span> = {"{"}
                 </p>
                 <p className="pl-4">
-                  role: <span className="text-[#D9F7E2]">&quot;Engineer&quot;</span>,
+                  role: <span className="text-[#0E6B45] dark:text-[#D9F7E2]">&quot;Engineer&quot;</span>,
                 </p>
                 <p className="pl-4">
-                  skills: <span className="text-[#D9F7E2]">[&quot;Web&quot;, &quot;AI&quot;]</span>,
+                  skills: <span className="text-[#0E6B45] dark:text-[#D9F7E2]">[&quot;Web&quot;, &quot;AI&quot;]</span>,
                 </p>
                 <p className="pl-4">
-                  focus: <span className="text-[#D9F7E2]">&quot;Build&quot;</span>
+                  focus: <span className="text-[#0E6B45] dark:text-[#D9F7E2]">&quot;Build&quot;</span>
                 </p>
                 <p>{"};"}</p>
               </div>
-              <div className="mt-4 flex items-center justify-between gap-2 border-t border-white/10 pt-3 text-[12px] text-[#8FA89A]">
+              <div className="mt-4 flex items-center justify-between gap-2 border-t border-border pt-3 text-[12px] text-muted dark:border-white/10 dark:text-[#8FA89A]">
                 <span className="flex items-center gap-1.5">
-                  <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-[#8FA89A]" />
+                  <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-muted dark:bg-[#8FA89A]" />
                   {heroContact.hint}
                 </span>
-                <span className="flex items-center gap-1 font-semibold text-[#B9F4CA] transition-all duration-200 group-hover:gap-1.5">
+                <span className="flex items-center gap-1 font-semibold text-accent transition-all duration-200 group-hover:gap-1.5 dark:text-[#B9F4CA]">
                   Connect <ArrowUpRight size={13} strokeWidth={2.5} />
                 </span>
               </div>
@@ -124,19 +124,19 @@ export function HeroCodeCard() {
               aria-hidden={!flipped}
               style={{ transform: "rotateY(180deg)" }}
               className={cn(
-                "absolute inset-0 flex w-[300px] flex-col rounded-2xl border border-white/10 bg-[#0C1A12]/95 p-5 shadow-[0_24px_60px_rgba(0,0,0,0.5)] [backface-visibility:hidden]",
+                "absolute inset-0 flex w-[300px] flex-col rounded-2xl border border-border bg-surface p-5 shadow-[var(--shadow-card)] transition-colors duration-200 dark:border-white/10 dark:bg-[#0C1A12]/95 dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] [backface-visibility:hidden]",
                 flipped ? "pointer-events-auto" : "pointer-events-none",
               )}
             >
               <div className="flex items-center justify-between">
-                <p className="font-mono text-[12px] font-bold uppercase tracking-[0.18em] text-[#6EE7A0]">
+                <p className="font-mono text-[12px] font-bold uppercase tracking-[0.18em] text-accent dark:text-[#6EE7A0]">
                   {heroContact.title}
                 </p>
                 <button
                   type="button"
                   onClick={() => setFlipped(false)}
                   aria-label="Flip back to code card"
-                  className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-white/15 bg-white/[0.05] text-[#9FD8AE] outline-none transition-colors hover:bg-white/[0.1] focus-visible:ring-2 focus-visible:ring-[#6EE7A0]"
+                  className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-border bg-soft text-accent outline-none transition-colors hover:bg-accent-soft focus-visible:ring-2 focus-visible:ring-accent dark:border-white/15 dark:bg-white/[0.05] dark:text-[#9FD8AE] dark:hover:bg-white/[0.1] dark:focus-visible:ring-[#6EE7A0]"
                 >
                   <ArrowLeft size={14} strokeWidth={2.5} />
                 </button>
@@ -152,12 +152,12 @@ export function HeroCodeCard() {
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{ ["--brand" as string]: color }}
-                        className="group/tile flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5 outline-none transition-all duration-200 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.08] focus-visible:ring-2 focus-visible:ring-[#6EE7A0]"
+                        className="group/tile flex items-center gap-2.5 rounded-xl border border-border bg-soft px-3 py-2.5 outline-none transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent-soft/60 focus-visible:ring-2 focus-visible:ring-accent dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:focus-visible:ring-[#6EE7A0]"
                       >
-                        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-white/10 bg-white/[0.05] text-[var(--brand)]">
+                        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-border bg-surface text-[var(--brand)] dark:border-white/10 dark:bg-white/[0.05]">
                           <Logo style={{ width: 17, height: 17 }} aria-hidden />
                         </span>
-                        <span className="truncate text-[13px] font-semibold text-white">
+                        <span className="truncate text-[13px] font-semibold text-text dark:text-white">
                           {link.label}
                         </span>
                       </a>
@@ -166,8 +166,8 @@ export function HeroCodeCard() {
                 })}
               </ul>
 
-              <p className="mt-auto flex items-center gap-1.5 border-t border-white/10 pt-3 text-[12px] text-[#8FA89A]">
-                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-[#8FA89A]" />
+              <p className="mt-auto flex items-center gap-1.5 border-t border-border pt-3 text-[12px] text-muted dark:border-white/10 dark:text-[#8FA89A]">
+                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-muted dark:bg-[#8FA89A]" />
                 {heroContact.hint}
               </p>
             </div>

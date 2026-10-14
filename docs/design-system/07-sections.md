@@ -1,4 +1,4 @@
-# 07 — Sections (v1.0 LOCKED)
+# 07 — Sections (v1.1 LOCKED)
 
 Order + ids: `#home` hero → `#work` 01 → `#services` 02 → `#skills` 03 → `#about` 04 → `#contact` 05. Footer unnumbered.
 
@@ -14,9 +14,9 @@ Badge: "Open to opportunities & freelance collaborations." Intro: `HI, I'M DS ME
 
 Featured card (40:60 image:text, status, title, problem, features, stack, links) + 2-col grid of secondary cards (16:10 images). Real screenshots only; mark In-Progress honestly; no unverified metrics. Case studies: problem, solution, role, architecture, decisions, challenges, lessons.
 
-## Services (#services) — 01–04 numbered cards
+## Services (#services) — 01–04 zigzag featured panels
 
-Full-Stack Web Apps · AI & RAG Solutions · Backend & APIs · Dashboards & CMS. 2-col desktop, stack mobile. Icons + concise copy.
+Full-Stack Web Apps · AI & RAG Solutions · Backend & APIs · Dashboards & CMS all render as featured panels (number, service icon, accent word, floating stack tiles from `stack`) with compact sizing (20/24/28px padding, 40px icon badge, 22/26px title). Panels flow in a zigzag: 01 left · 02 right · 03 left · 04 right (lg+, 74% wide; right-aligned rows mirror their internals so clusters face the gap), linked by a connected dashed line between panels (accent nodes on each end; straight vertical link below lg where panels stack full-width). Desktop cluster tiles use fixed-pixel slots in a centered 240×176 box — never overlapping; tiles wrap on mobile. Icons + concise copy. (proposal 2026-10-14-services-zigzag-flow)
 
 ## Skills (#skills) — grouped tags, no % bars
 

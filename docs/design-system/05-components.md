@@ -1,4 +1,4 @@
-# 05 — Components (v1.0 LOCKED)
+# 05 — Components (v1.1 LOCKED)
 
 Borders define structure more than shadows. Radius: card 12 / button 8 / input 8 / tag 6 / badge pill.
 
