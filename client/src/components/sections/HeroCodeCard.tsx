@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import { motion, useReducedMotion, useSpring } from "motion/react";
+import { motion, useInView, useReducedMotion, useSpring } from "motion/react";
 import { heroContact } from "@/data/site";
 import { brandMeta, type BrandKey } from "@/components/ui/BrandIcons";
 import { cn } from "@/lib/cn";
@@ -23,6 +23,9 @@ export function HeroCodeCard() {
   const reduce = useReducedMotion();
   const [flipped, setFlipped] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  // Idle float + ring spin are infinite loops — only run them while the card
+  // is actually on screen (it's hidden below lg, so mobile never animates).
+  const inView = useInView(cardRef, { margin: "80px" });
 
   const rotateX = useSpring(0, TILT_SPRING);
   const rotateY = useSpring(BASE_ROTATE_Y, TILT_SPRING);
@@ -47,8 +50,8 @@ export function HeroCodeCard() {
       <motion.div
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-accent/30 dark:border-white/15"
-        animate={reduce ? undefined : { rotate: 360 }}
-        transition={reduce ? undefined : { duration: 60, repeat: Infinity, ease: "linear" }}
+        animate={reduce || !inView ? undefined : { rotate: 360 }}
+        transition={reduce || !inView ? undefined : { duration: 60, repeat: Infinity, ease: "linear" }}
       />
 
       {/* Idle float — pointer-events:none on all 3D wrappers: in a
@@ -59,8 +62,8 @@ export function HeroCodeCard() {
           bubble up to the tilt handlers below. */}
       <motion.div
         className="pointer-events-none [transform-style:preserve-3d]"
-        animate={reduce ? undefined : { y: [0, -12, 0] }}
-        transition={reduce ? undefined : { duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+        animate={reduce || !inView ? undefined : { y: [0, -12, 0] }}
+        transition={reduce || !inView ? undefined : { duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
       >
         {/* Pointer tilt */}
         <motion.div

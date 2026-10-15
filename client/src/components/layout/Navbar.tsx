@@ -14,7 +14,7 @@ export function Navbar() {
   const themeIcon = !mounted || theme !== "dark" ? <Moon size={18} /> : <Sun size={18} />;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-[#07110D]/95 text-[#EDF5EE] backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-[#07110D]/95 text-[#EDF5EE]">
       <Container>
         <nav aria-label="Primary" className="flex h-16 items-center justify-between md:h-[68px] lg:h-[72px]">
           <a href="#home" className="text-[15px] font-extrabold tracking-tight text-white">

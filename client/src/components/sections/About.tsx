@@ -3,13 +3,25 @@ import { about } from "@/data/site";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Reveal } from "@/components/ui/Reveal";
+import { TypingSearchCard } from "@/components/ui/TypingSearchCard";
 
 export function About() {
   return (
     <Section id="about" number="04" label="About & Education" title={<>A bit <span className="text-accent">about me</span></>}>
+      {/* Desktop: intro + education stacked left, floating command card right
+          (explicit grid placement lets the card span both rows and center
+          against them). Mobile stacks intro → card → education. */}
       <div className="grid gap-3 md:grid-cols-2 md:gap-[14px] lg:gap-4">
         <Reveal>
           <p className="text-[15px] leading-[1.7] text-muted">{about.body}</p>
+        </Reveal>
+        <Reveal delay={0.14} className="flex items-center md:col-start-2 md:row-span-2 md:row-start-1">
+          <TypingSearchCard
+            label={about.command.label}
+            messages={about.command.messages}
+            suggestions={about.command.suggestions}
+            status={about.command.status}
+          />
         </Reveal>
         <Reveal delay={0.08}>
           <Card className="h-full">

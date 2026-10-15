@@ -1,8 +1,12 @@
 import { ArrowUpRight } from "lucide-react";
 import { hero } from "@/data/site";
 import { Container } from "@/components/layout/Container";
-import { Reveal } from "@/components/ui/Reveal";
 import { HeroCodeCard } from "@/components/sections/HeroCodeCard";
+
+// Above-the-fold copy uses the CSS `animate-fade-up` keyframe (globals.css)
+// instead of motion's Reveal: the headline — the page's LCP element — paints
+// as soon as HTML+CSS arrive, with no wait for JS hydration, while keeping
+// the same §08 fade-up look. Delays mirror the old Reveal stagger.
 
 // Full-screen hero matching reference: deep-green panel, big
 // headline, tilted code card, bottom capability strip.
@@ -20,18 +24,18 @@ export function Hero() {
       <Container className="relative flex w-full flex-1 items-center py-12 md:py-16 lg:py-6">
         <div className="grid w-full items-center gap-12 py-6 lg:grid-cols-[1.12fr_0.88fr] lg:gap-8">
           <div>
-            <Reveal>
+            <div className="animate-fade-up">
               <span className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent-soft px-4 py-[7px] text-[13px] font-medium text-accent dark:border-white/10 dark:bg-white/[0.06] dark:text-[#B9D9C1]">
                 <span aria-hidden className="h-2 w-2 rounded-full bg-accent dark:bg-[#4ADE80]" />
                 Open to jobs &amp; freelance projects
               </span>
-            </Reveal>
-            <Reveal delay={0.06}>
+            </div>
+            <div className="animate-fade-up" style={{ animationDelay: "60ms" }}>
               <p className="mt-8 text-[12px] font-bold uppercase tracking-[0.22em] text-muted dark:text-[#8FA89A]">
                 {hero.intro}
               </p>
-            </Reveal>
-            <Reveal delay={0.12}>
+            </div>
+            <div className="animate-fade-up" style={{ animationDelay: "120ms" }}>
               <h1 className="mt-4 text-[46px] font-extrabold leading-[0.98] tracking-[-0.03em] text-text sm:text-[64px] lg:text-[74px] xl:text-[80px] dark:text-white">
                 Engineering
                 <br />
@@ -41,19 +45,19 @@ export function Hero() {
                   <span className="text-[#EAB308] dark:text-[#FACC15]">.</span>
                 </span>
               </h1>
-            </Reveal>
-            <Reveal delay={0.18}>
+            </div>
+            <div className="animate-fade-up" style={{ animationDelay: "180ms" }}>
               <p className="mt-5 text-[17px] font-bold text-text lg:text-[21px] dark:text-white">
                 Full-Stack Developer <span className="text-accent dark:text-[#B9F4CA]">&amp;</span> AI Engineer
               </p>
-            </Reveal>
-            <Reveal delay={0.24}>
+            </div>
+            <div className="animate-fade-up" style={{ animationDelay: "240ms" }}>
               <p className="mt-4 max-w-[56ch] text-[14px] leading-[1.75] text-muted lg:text-[15px] dark:text-[#9DB3A6]">
                 Building modern web applications, secure backend systems, and AI-powered
                 products using scalable architecture and thoughtful engineering.
               </p>
-            </Reveal>
-            <Reveal delay={0.3}>
+            </div>
+            <div className="animate-fade-up" style={{ animationDelay: "300ms" }}>
               <div className="mt-7 flex flex-wrap items-center gap-3">
                 <a
                   href={hero.primaryCta.href}
@@ -68,11 +72,11 @@ export function Hero() {
                   {hero.secondaryCta.label} <span aria-hidden>→</span>
                 </a>
               </div>
-            </Reveal>
+            </div>
           </div>
-          <Reveal delay={0.2} className="hidden justify-center lg:flex">
+          <div className="hidden animate-fade-up justify-center lg:flex" style={{ animationDelay: "200ms" }}>
             <HeroCodeCard />
-          </Reveal>
+          </div>
         </div>
       </Container>
 

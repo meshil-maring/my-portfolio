@@ -1,5 +1,10 @@
 # Design System CHANGELOG
 
+## [1.3] — 2026-10-14 — About: floating "I know how to" typing command card
+
+- CHANGED: 07-sections — About (#about) right column is now a floating AI-style command card; intro + education card stack in the left column (desktop), card spans both rows vertically centered; mobile stacks intro → card → education (proposal: proposals/2026-10-14-about-typing-command-card.md).
+- ADDED: components/ui/TypingSearchCard — reusable typing/deleting loop (55/28ms per char, 1600ms hold, 320ms gap) with a blinking accent caret (new `--animate-caret-blink` token + `caret-blink` keyframes); the rotation runs the five capabilities first, then brings the three progressively blurred suggestions up into the label line one by one (the active row sharpens from blur to accent green); one-time sr-only announcement of the full rotation; static first message with zero timers under prefers-reduced-motion, all timeouts cleared in effect cleanup (proposal: proposals/2026-10-14-about-typing-command-card.md).
+
 ## [1.2] — 2026-10-14 — Services: zigzag flow + connected dashed line
 
 - CHANGED: 07-sections, 00-overview — Services & Capabilities panels now flow in a zigzag (01 left · 02 right · 03 left · 04 right at lg, 74% width; right-aligned rows mirror their internals via the new `FeaturedService` `mirror` prop) and are linked by a connected dashed line (`FlowConnector` in `Services.tsx`: percentage-coordinate SVG — no viewBox, no dash distortion — 70%/30% inner-edge anchors with accent node dots on lg, straight vertical link below lg) (proposal: proposals/2026-10-14-services-zigzag-flow.md).

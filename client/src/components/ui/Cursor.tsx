@@ -35,6 +35,7 @@ export function Cursor() {
     let ry = y;
     let shown = false;
     let raf = 0;
+    let lastTarget: EventTarget | null = null;
 
     const onMove = (event: PointerEvent) => {
       x = event.clientX;
@@ -45,11 +46,18 @@ export function Cursor() {
         dot.style.opacity = "1";
       }
       dot.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+      // Only re-run the closest() DOM query when the event target changed —
+      // pointermove can fire at 120Hz and the hover state rarely flips.
       const target = event.target as Element | null;
-      const active = Boolean(
-        target?.closest("a, button, [role='button'], summary, label, [data-cursor='hover']"),
-      );
-      ring.dataset.active = active ? "true" : "false";
+      if (target !== lastTarget) {
+        lastTarget = target;
+        const active = Boolean(
+          target?.closest("a, button, [role='button'], summary, label, [data-cursor='hover']"),
+        );
+        ring.dataset.active = active ? "true" : "false";
+      }
+      // Restart the lerp loop if it settled (see loop() below).
+      if (raf === 0) raf = requestAnimationFrame(loop);
     };
 
     const onDown = () => {
@@ -64,19 +72,28 @@ export function Cursor() {
       dot.style.opacity = "0";
     };
 
+    // Lerp the ring toward the pointer, then STOP the loop once it has
+    // settled — an idle cursor must not burn a permanent 60fps frame loop.
+    // onMove restarts it whenever the pointer moves again.
     const loop = () => {
       const ease = reduce ? 1 : 0.18;
       rx += (x - rx) * ease;
       ry += (y - ry) * ease;
+      // Settled when both axes are within a sub-pixel of the target.
+      const settled = Math.abs(x - rx) < 0.1 && Math.abs(y - ry) < 0.1;
+      if (settled) {
+        rx = x;
+        ry = y;
+      }
       ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
-      raf = requestAnimationFrame(loop);
+      raf = settled ? 0 : requestAnimationFrame(loop);
     };
 
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerdown", onDown);
     window.addEventListener("pointerup", onUp);
     document.addEventListener("pointerleave", onLeave);
-    raf = requestAnimationFrame(loop);
+    // No loop until the pointer first moves — nothing to track before that.
 
     return () => {
       window.removeEventListener("pointermove", onMove);

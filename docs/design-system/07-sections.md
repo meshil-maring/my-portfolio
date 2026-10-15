@@ -22,9 +22,9 @@ Full-Stack Web Apps · AI & RAG Solutions · Backend & APIs · Dashboards & CMS 
 
 Frontend (React, TS, JS, HTML, CSS, Tailwind, Vite) · Backend (Python, FastAPI, Node, Express, REST, auth, RBAC) · AI/ML (RAG, LLMs, embeddings, semantic search, NLP, HF, sklearn) · Data/Infra (PostgreSQL, Supabase, pgvector, R2, Docker, Git/GitHub). Only what projects prove.
 
-## About (#about) — desc left, education card right; stack mobile
+## About (#about) — desc + education card left, typing command card right; stack mobile (desc → card → education)
 
-CSE student (Data Science & ML), Quest Group of Institutions Punjab. Full-stack + backend + AI. Areas: DSA, DBMS, ML, stats, vision, linear algebra.
+CSE student (Data Science & ML), Quest Group of Institutions Punjab. Full-stack + backend + AI. Areas: DSA, DBMS, ML, stats, vision, linear algebra. Right column: floating "I know how to" command card (`TypingSearchCard`) typing five capabilities — full-stack apps, secure REST APIs, AI assistants, scalable databases, workflow automation — then bringing the three blurred suggestions below up into the line one by one (active row sharpens to accent green); blinking accent caret; static under reduced motion. (proposal 2026-10-14-about-typing-command-card)
 
 ## Contact (#contact) — soft-green rounded container, centered
 

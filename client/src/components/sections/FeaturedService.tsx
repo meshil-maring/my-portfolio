@@ -1,8 +1,9 @@
 "use client";
 
+import { useRef } from "react";
 import { Code2 } from "lucide-react";
 import { serviceIcons } from "@/components/ui/serviceIcons";
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useInView, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/cn";
 import { Reveal } from "@/components/ui/Reveal";
 import { brandMeta, type BrandKey } from "@/components/ui/BrandIcons";
@@ -24,16 +25,20 @@ const clusterSlots: { size: number; className: string }[] = [
 ];
 
 // One frosted brand-logo tile with a brand-colored glow; gentle float on desktop.
+// `active` = panel is on screen — floating is an infinite loop, so off-screen
+// panels (and the hidden mobile/desktop duplicate row) stay perfectly still.
 function FloatingTile({
   brandKey,
   size,
   delay,
   reduce,
+  active,
 }: {
   brandKey: BrandKey;
   size: number;
   delay: number;
   reduce: boolean;
+  active: boolean;
 }) {
   const { Logo, color, label } = brandMeta[brandKey];
   const tile = (
@@ -60,7 +65,7 @@ function FloatingTile({
       </div>
     </div>
   );
-  if (reduce) return tile;
+  if (reduce || !active) return tile;
   return (
     <motion.div
       animate={{ y: [0, -7, 0] }}
@@ -89,6 +94,9 @@ export function FeaturedService({
   mirror?: boolean;
 }) {
   const reduce = useReducedMotion();
+  const panelRef = useRef<HTMLDivElement>(null);
+  // Floating tiles loop forever — only animate while the panel is visible.
+  const panelInView = useInView(panelRef, { margin: "100px" });
   const Icon = serviceIcons[service.icon] ?? Code2;
   // Only keys known to BrandIcons reach FloatingTile — bad data can't crash it.
   const stackKeys = (service.stack ?? []).filter((key): key is BrandKey => key in brandMeta);
@@ -99,7 +107,7 @@ export function FeaturedService({
 
   return (
     <Reveal className={className}>
-      <div className="relative overflow-hidden rounded-card border border-border bg-surface p-5 shadow-[var(--shadow-card)] transition-colors duration-200 dark:border-white/10 dark:bg-[#07110D] dark:shadow-none md:p-6 lg:p-7">
+      <div ref={panelRef} className="relative overflow-hidden rounded-card border border-border bg-surface p-5 shadow-[var(--shadow-card)] transition-colors duration-200 dark:border-white/10 dark:bg-[#07110D] dark:shadow-none md:p-6 lg:p-7">
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="absolute -left-16 -top-24 h-56 w-56 rounded-full bg-accent-soft blur-[90px] dark:bg-[#1B4D33]/40" />
           <div className="absolute -bottom-24 right-8 h-64 w-64 rounded-full bg-accent/10 blur-[100px] dark:bg-[#123B26]/50" />
@@ -141,6 +149,7 @@ export function FeaturedService({
                   size={52}
                   delay={i * 0.15}
                   reduce={!!reduce}
+                  active={panelInView}
                 />
               ))}
             </div>
@@ -152,7 +161,7 @@ export function FeaturedService({
               <div className="absolute inset-y-3 left-1/2 w-[240px] -translate-x-1/2">
                 {stackKeys.slice(0, clusterSlots.length).map((key, i) => (
                   <div key={`${key}-${i}`} className={cn("absolute", clusterSlots[i].className)}>
-                    <FloatingTile brandKey={key} size={clusterSlots[i].size} delay={i * 0.18} reduce={!!reduce} />
+                    <FloatingTile brandKey={key} size={clusterSlots[i].size} delay={i * 0.18} reduce={!!reduce} active={panelInView} />
                   </div>
                 ))}
               </div>

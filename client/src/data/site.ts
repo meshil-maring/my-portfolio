@@ -44,6 +44,25 @@ export const heroContact = {
 
 export const about = {
   body: "I'm a Computer Science Engineering student specializing in Data Science and Machine Learning, with hands-on experience building full-stack applications, backend systems, and AI-powered solutions. I enjoy solving practical problems, creating scalable architectures, and turning ambitious ideas into dependable products.",
+  // Floating command card shown beside the intro
+  // (components/ui/TypingSearchCard.tsx) — messages type in a loop; each
+  // message swap fades the card out/in and the upcoming lines below shift.
+  command: {
+    label: "I know how to",
+    status: "Building ideas into software",
+    messages: [
+      "Build full-stack applications",
+      "Develop secure REST APIs",
+      "Create AI-powered assistants",
+      "Design scalable databases",
+      "Automate business workflows",
+    ],
+    suggestions: [
+      "Ship a secure REST API",
+      "Build an AI-powered assistant",
+      "Automate a business workflow",
+    ],
+  },
   education: {
     degree: "Bachelor of Technology in Computer Science Engineering",
     institution: "Quest Group of Institutions, Punjab",
