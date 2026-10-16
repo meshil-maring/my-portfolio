@@ -3,6 +3,7 @@ import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Tag } from "@/components/ui/Tag";
 import { Reveal } from "@/components/ui/Reveal";
+import { cardTitleClass } from "@/lib/typography";
 
 export function Skills() {
   return (
@@ -11,7 +12,7 @@ export function Skills() {
         {skillGroups.map((g, i) => (
           <Reveal key={g.label} delay={(i % 2) * 0.06}>
             <Card className="h-full">
-              <h3 className="text-base font-bold">{g.label}</h3>
+              <h3 className={cardTitleClass}>{g.label}</h3>
               <ul className="mt-3 flex flex-wrap gap-1.5">
                 {g.skills.map((s) => (
                   <li key={s}><Tag>{s}</Tag></li>

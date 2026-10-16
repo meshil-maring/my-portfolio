@@ -14,11 +14,11 @@ export function Navbar() {
   const themeIcon = !mounted || theme !== "dark" ? <Moon size={18} /> : <Sun size={18} />;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-[#07110D]/95 text-[#EDF5EE]">
+    <header className="sticky top-0 z-40 border-b border-border bg-surface/95 text-text backdrop-blur-sm transition-colors duration-200">
       <Container>
         <nav aria-label="Primary" className="flex h-16 items-center justify-between md:h-[68px] lg:h-[72px]">
-          <a href="#home" className="text-[15px] font-extrabold tracking-tight text-white">
-            MESHIL<span className="ml-1.5 font-mono text-[11px] font-medium tracking-[0.2em] text-[#8FA89A]">DEV</span>
+          <a href="#home" className="text-[15px] font-extrabold tracking-tight text-text">
+            MESHIL<span className="ml-1.5 font-mono text-[11px] font-medium tracking-[0.12em] text-faint">DEV</span>
           </a>
 
           <ul className="hidden items-center gap-7 md:flex">
@@ -27,9 +27,9 @@ export function Navbar() {
                 <a
                   href={link.href}
                   className={cn(
-                    "text-[13.5px] font-medium text-[#C4D6C9] transition-colors hover:text-white",
+                    "text-[13.5px] font-medium text-muted transition-colors hover:text-text",
                     link.emphasize &&
-                      "rounded-[8px] border border-white/20 bg-transparent px-4 py-2 text-[13px] font-bold text-[#B9F4CA] hover:border-[#B9F4CA]/60 hover:text-[#B9F4CA]",
+                      "rounded-btn border border-accent/30 px-4 py-2 text-[13px] font-bold text-accent hover:border-accent",
                   )}
                 >
                   {link.label}
@@ -41,7 +41,7 @@ export function Navbar() {
               <button
                 onClick={toggle}
                 aria-label="Toggle theme"
-                className="rounded-btn p-2 text-[#C4D6C9] transition-colors hover:bg-white/10 hover:text-white"
+                className="rounded-btn p-2 text-muted transition-colors hover:bg-soft hover:text-text"
               >
                 {themeIcon}
               </button>
@@ -52,7 +52,7 @@ export function Navbar() {
             <button
               onClick={toggle}
               aria-label="Toggle theme"
-              className="rounded-btn p-2 text-[#C4D6C9] hover:bg-white/10"
+              className="rounded-btn p-2 text-muted transition-colors hover:bg-soft hover:text-text"
             >
               {themeIcon}
             </button>
@@ -60,7 +60,7 @@ export function Navbar() {
               onClick={() => setOpen((o) => !o)}
               aria-expanded={open}
               aria-label={open ? "Close menu" : "Open menu"}
-              className="rounded-btn p-2 text-white hover:bg-white/10"
+              className="rounded-btn p-2 text-text transition-colors hover:bg-soft"
             >
               {open ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -75,8 +75,8 @@ export function Navbar() {
                   href={link.href}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "block rounded-btn px-3 py-2.5 text-sm font-medium text-[#EDF5EE] hover:bg-white/10",
-                    link.emphasize && "border border-white/20 font-bold text-[#B9F4CA]",
+                    "block rounded-btn px-3 py-2.5 text-sm font-medium text-text hover:bg-soft",
+                    link.emphasize && "border border-accent/30 font-bold text-accent",
                   )}
                 >
                   {link.label}

@@ -4,6 +4,7 @@ import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Reveal } from "@/components/ui/Reveal";
 import { TypingSearchCard } from "@/components/ui/TypingSearchCard";
+import { cardTitleClass } from "@/lib/typography";
 
 export function About() {
   return (
@@ -26,10 +27,10 @@ export function About() {
         <Reveal delay={0.08}>
           <Card className="h-full">
             <div className="flex items-center gap-2.5">
-              <span className="flex h-10 w-10 items-center justify-center rounded-btn bg-accent-soft text-accent">
+              <span className="flex h-10 w-10 items-center justify-center rounded-card bg-accent-soft text-accent">
                 <GraduationCap size={18} />
               </span>
-              <h3 className="text-base font-bold">Education</h3>
+              <h3 className={cardTitleClass}>Education</h3>
             </div>
             <p className="mt-3 text-sm font-semibold">{about.education.degree}</p>
             <p className="mt-1 text-sm text-muted">{about.education.institution}</p>

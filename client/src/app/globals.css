@@ -64,6 +64,17 @@
   --color-border: var(--color-border);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
+
+  /* Radius + card shadow live in :root/.dark above, but Tailwind v4 only
+     generates a utility when the token is registered HERE in @theme — until
+     this block, rounded-card / rounded-btn / rounded-chip compiled to nothing
+     site-wide (cards, buttons, tags and inputs all rendered square).
+     `inline` keeps the emitted value bound to the :root/.dark variable, so
+     --shadow-card still flips to `none` in dark mode. */
+  --radius-card: var(--radius-card);
+  --radius-btn: var(--radius-button);
+  --radius-chip: var(--radius-chip);
+  --shadow-card: var(--shadow-card);
 }
 
 /* Fade-up entrance for ABOVE-THE-FOOLD content (hero): a plain CSS

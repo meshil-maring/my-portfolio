@@ -12,6 +12,7 @@ export const navLinks: NavLink[] = [
   { label: "Projects", href: "#work" },
   { label: "Services", href: "#services" },
   { label: "Skills", href: "#skills" },
+  { label: "Discuss", href: "#discuss" },
   { label: "Let's Connect", href: "#contact", emphasize: true },
 ];
 
@@ -82,6 +83,31 @@ export const contact = {
   heading: "Let's build something great.",
   description:
     "Whether you're hiring a software engineer or planning your next digital product, I'd be happy to connect and discuss how we can work together.",
-  primaryCta: { label: "Discuss a Project", href: "mailto:hello@example.com" },
+  primaryCta: { label: "Discuss a Project", href: "#discuss" },
   secondaryCta: { label: "Recruitment Inquiry", href: "mailto:hello@example.com" },
+};
+
+// "Discuss a Project" section (id #discuss, sits directly above Contact).
+// The form is client-side only: it composes a prefilled mailto: — nothing is
+// stored or POSTed (static site, no backend). TODO(owner): swap hrefs to a
+// verified address before launch (same placeholder as `contact`/`socials`).
+export const discuss = {
+  description:
+    "Planning a web app, an AI feature, a backend, or a full product? Share a few details and I'll reply with honest feedback, questions, and a suggested next step — no obligation.",
+  checklistTitle: "What helps me reply faster",
+  checklist: [
+    "What you're building and who it's for",
+    "The key features or the problem to solve",
+    "Timeline and rough budget range",
+    "Links to references, specs, or existing code",
+  ],
+  projectTypes: [
+    "Full-Stack Web Application",
+    "AI / RAG Solution",
+    "Backend & APIs",
+    "Dashboard & CMS",
+    "Something else",
+  ],
+  submitLabel: "Send inquiry",
+  email: "hello@example.com",
 };

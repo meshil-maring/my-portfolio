@@ -282,7 +282,7 @@ export function ProcessStepCurve({
                     : undefined),
                 }}
               >
-                <span aria-hidden className="shrink-0 rounded-full bg-[#EFC65C] shadow-[0_0_0_3px] shadow-[#EFC65C]/15 group-hover:animate-heartbeat" style={{ width: 7, height: 7 }} />
+                <span aria-hidden className="shrink-0 rounded-full bg-[#EAB308] shadow-[0_0_0_3px] shadow-[#EAB308]/15 group-hover:animate-heartbeat dark:bg-[#FACC15] dark:shadow-[#FACC15]/15" style={{ width: 7, height: 7 }} />
                 <span aria-hidden className="h-px shrink-0 bg-border" style={{ width: stepRuleWidth }} />
                 <span className="whitespace-pre">Step {line.text}</span>
               </div>

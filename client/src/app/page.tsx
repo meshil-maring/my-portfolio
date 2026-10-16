@@ -6,6 +6,7 @@ import { Projects } from "@/components/sections/Projects";
 import { Services } from "@/components/sections/Services";
 import { Skills } from "@/components/sections/Skills";
 import { About } from "@/components/sections/About";
+import { DiscussProject } from "@/components/sections/DiscussProject";
 import { Contact } from "@/components/sections/Contact";
 
 // Process sits at the bottom of a long page — dynamic() keeps its client
@@ -16,7 +17,7 @@ const Process = dynamic(() =>
   import("@/components/sections/Process").then((m) => ({ default: m.Process })),
 );
 
-// design-system §07 §19: nav → hero → work → services → skills → about → process → contact → footer
+// design-system §07 §19: nav → hero → work → services → skills → about → process → discuss → contact → footer
 export default function Home() {
   return (
     <div className="flex min-h-full flex-col">
@@ -28,6 +29,7 @@ export default function Home() {
         <Skills />
         <About />
         <Process />
+        <DiscussProject />
         <Contact />
       </main>
       <Footer />

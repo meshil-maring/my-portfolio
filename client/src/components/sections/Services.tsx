@@ -32,12 +32,12 @@ function FlowConnector({ upperLeft }: { upperLeft: boolean }) {
             y1="0"
             x2="50%"
             y2="100%"
-            className="stroke-accent/70 dark:stroke-[#B9F4CA]/55"
+            className="stroke-accent/70"
             strokeWidth={1.5}
             strokeDasharray="5 6"
           />
-          <circle cx="50%" cy="0" r={3.5} className="fill-accent dark:fill-[#B9F4CA]" />
-          <circle cx="50%" cy="100%" r={3.5} className="fill-accent dark:fill-[#B9F4CA]" />
+          <circle cx="50%" cy="0" r={3.5} className="fill-accent" />
+          <circle cx="50%" cy="100%" r={3.5} className="fill-accent" />
         </g>
         {/* lg+: zigzag diagonal from the upper panel's inner edge down to
             the lower panel's inner edge */}
@@ -47,12 +47,12 @@ function FlowConnector({ upperLeft }: { upperLeft: boolean }) {
             y1="0"
             x2={end}
             y2="100%"
-            className="stroke-accent/70 dark:stroke-[#B9F4CA]/55"
+            className="stroke-accent/70"
             strokeWidth={1.5}
             strokeDasharray="6 7"
           />
-          <circle cx={start} cy="0" r={4} className="fill-accent dark:fill-[#B9F4CA]" />
-          <circle cx={end} cy="100%" r={4} className="fill-accent dark:fill-[#B9F4CA]" />
+          <circle cx={start} cy="0" r={4} className="fill-accent" />
+          <circle cx={end} cy="100%" r={4} className="fill-accent" />
         </g>
       </svg>
     </Reveal>

@@ -54,7 +54,7 @@ export function GlassNumber({ number, icon, className, tone = "default" }: Glass
         <span
           className={cn(
             "grid place-items-center [&_svg]:h-[18px] [&_svg]:w-[18px] [&_svg]:fill-none [&_svg]:stroke-current [&_svg]:stroke-[2.2] [&_svg]:stroke-linecap-round [&_svg]:stroke-linejoin-round",
-            onDark ? "text-white" : "text-text dark:text-white",
+            onDark ? "text-white" : "text-text",
           )}
         >
           {icon}

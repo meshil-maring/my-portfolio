@@ -1,5 +1,15 @@
 # Design System CHANGELOG
 
+## [1.3.1] — 2026-10-15 — Consistency pass (tokens, one header, one label style)
+
+- FIXED: 11-tokens, 14-implementation — registered `--radius-card` / `--radius-btn` / `--radius-chip` / `--shadow-card` in `@theme inline` (`globals.css`). Until now `rounded-card`, `rounded-btn`, `rounded-chip` compiled to **nothing** site-wide (verified against built CSS), so cards, buttons, tags and inputs rendered square; all ad-hoc radii (`rounded-2xl`, `rounded-[10px]`, `rounded-[7px]`, `rounded-[18px]`, `rounded-[10px]` icon tiles) now use the tokens (card 12 / button 8 / chip 6).
+- CHANGED: 02, 05, 07 — one shared type scale: new `client/src/lib/typography.ts` (`eyebrowClass` 11px/700/+0.12em mono, `sectionTitleClass` 28/36, `cardTitleClass` 18/20 w700, `featuredTitleClass` 22/26 w700). `Projects` now renders through the shared `Section` header (GlassNumber 01 · mono eyebrow · shared H2, spec §03 padding 28/34/40 and gaps 12/14/16), `Process` lost its smaller H2 override, `Contact` reuses `sectionTitleClass`, card H3s (About/Skills/Discuss/Projects) unified at 18/20.
+- CHANGED: 05 — `Button` accepts `href` and renders an `<a>` with the identical §05 styles (44px/8px radius/13px/700); Hero + Contact CTAs use it instead of copied classes (Hero was 48px/radius-10). `Projects` tags use the `Tag` component (was `rounded-[7px]`/12px inline copies).
+- CHANGED: 01, 09 — dark mode now runs purely on the locked dark palette: removed ~50 hardcoded `dark:…-[#hex]` overrides across Hero, Projects, Services/FeaturedService, HeroCodeCard, TypingSearchCard, GlassNumber, DiscussProject; `Navbar` is theme-aware (`bg-surface`/`border-border`/token text) per §09 instead of always-dark `#07110D`.
+- CHANGED: 02 — uppercase micro-labels unified at the §02 label style (was 0.18em/0.2em/0.22em in seven places): hero intro, hero capability strip, card status lines, code-card title, logo `DEV` suffix.
+- CHANGED: 01 — one accent-yellow pair site-wide: `#EAB308` (light) / `#FACC15` (dark) for the hero period, process step dot and project corner mark (previously also `#EFC65C`/`#F6D47E`).
+- CHANGED: 03 — hero micro-spacing aligned to spec (badge→intro 24 → intro→H1 12 → H1→role 16 → desc→CTA 20); 40px icon tiles standardized on `rounded-card`; Contact social links reuse `BrandIcons` (one icon registry site-wide).
+
 ## [1.3] — 2026-10-14 — About: floating "I know how to" typing command card
 
 - CHANGED: 07-sections — About (#about) right column is now a floating AI-style command card; intro + education card stack in the left column (desktop), card spans both rows vertically centered; mobile stacks intro → card → education (proposal: proposals/2026-10-14-about-typing-command-card.md).

@@ -7,6 +7,7 @@ import { motion, useInView, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/cn";
 import { Reveal } from "@/components/ui/Reveal";
 import { brandMeta, type BrandKey } from "@/components/ui/BrandIcons";
+import { featuredTitleClass } from "@/lib/typography";
 import type { Service } from "@/types/portfolio";
 
 // Desktop scattered cluster — fixed-pixel slots inside a centered fixed-width
@@ -46,7 +47,7 @@ function FloatingTile({
       {/* Visible name label on hover */}
       <span
         aria-hidden
-        className="pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-surface px-2 py-1 text-[11px] font-semibold text-text opacity-0 shadow-lg backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100 dark:border-white/15 dark:bg-[#0C1A12]/95 dark:text-white"
+        className="pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-chip border border-border bg-surface px-2 py-1 text-[11px] font-semibold text-text opacity-0 shadow-lg backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100"
       >
         {label}
       </span>
@@ -55,7 +56,7 @@ function FloatingTile({
         aria-label={label}
         style={{ width: size, height: size, ["--brand" as string]: color }}
         className={cn(
-          "grid place-items-center rounded-[18px] border border-border bg-surface shadow-[var(--shadow-card)] backdrop-blur-md dark:border-white/15 dark:bg-white/[0.06] dark:shadow-none",
+          "grid place-items-center rounded-card border border-border bg-surface shadow-[var(--shadow-card)] backdrop-blur-md",
         )}
       >
         <Logo
@@ -107,10 +108,10 @@ export function FeaturedService({
 
   return (
     <Reveal className={className}>
-      <div ref={panelRef} className="relative overflow-hidden rounded-card border border-border bg-surface p-5 shadow-[var(--shadow-card)] transition-colors duration-200 dark:border-white/10 dark:bg-[#07110D] dark:shadow-none md:p-6 lg:p-7">
+      <div ref={panelRef} className="relative overflow-hidden rounded-card border border-border bg-surface p-5 shadow-[var(--shadow-card)] transition-colors duration-200 md:p-6 lg:p-7">
         <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="absolute -left-16 -top-24 h-56 w-56 rounded-full bg-accent-soft blur-[90px] dark:bg-[#1B4D33]/40" />
-          <div className="absolute -bottom-24 right-8 h-64 w-64 rounded-full bg-accent/10 blur-[100px] dark:bg-[#123B26]/50" />
+          <div className="absolute -left-16 -top-24 h-56 w-56 rounded-full bg-accent-soft blur-[90px]" />
+          <div className="absolute -bottom-24 right-8 h-64 w-64 rounded-full bg-accent/10 blur-[100px]" />
         </div>
 
         <div
@@ -121,20 +122,20 @@ export function FeaturedService({
         >
           <div className={cn(mirror && "lg:order-2")}>
             <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-[12px] border border-accent/25 bg-accent-soft text-accent dark:border-[#B9F4CA]/25 dark:bg-[#B9F4CA]/12 dark:text-[#B9F4CA]">
+              <span className="flex h-10 w-10 items-center justify-center rounded-card border border-accent/25 bg-accent-soft text-accent">
                 <Icon size={18} />
               </span>
-              <span className="font-mono text-sm font-bold tracking-[0.02em] text-accent dark:text-[#B9F4CA]">
+              <span className="font-mono text-sm font-bold tracking-[0.02em] text-accent">
                 {service.n}
               </span>
             </div>
 
-            <h3 className="mt-4 text-[22px] font-extrabold leading-[1.15] tracking-[-0.03em] text-text lg:text-[26px] dark:text-white">
+            <h3 className={cn(featuredTitleClass, "mt-4")}>
               {before}
-              {highlight && <span className="text-accent dark:text-[#B9F4CA]">{highlight}</span>}
+              {highlight && <span className="text-accent">{highlight}</span>}
             </h3>
 
-            <p className="mt-3 max-w-[46ch] text-[14px] leading-[1.75] text-muted lg:text-[15px] dark:text-[#9DB3A6]">
+            <p className="mt-3 max-w-[46ch] text-[14px] leading-[1.75] text-muted lg:text-[15px]">
               {service.description}
             </p>
           </div>

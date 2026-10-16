@@ -132,29 +132,28 @@ export function TypingSearchCard({ label, messages, suggestions, status, classNa
 
   return (
     <div ref={rootRef} className={cn("w-full", className)}>
-      {/* Command card — border-defined structure + soft floating shadow.
-          rounded-xl (12px) = the §05 card radius, used directly because the
-          --radius-card token isn't registered in @theme (rounded-card is
-          currently a no-op site-wide). Between messages it fades out, slides
+      {/* Command card — border-defined structure + soft floating shadow
+          (§05 card tokens: rounded-card 12px, --shadow-card — light only,
+          `none` in dark). Between messages it fades out, slides
           up a touch and scales down (0.26s), swaps text while invisible,
           then eases back in as the next line types. */}
       <motion.div
         initial={false}
         animate={leaving ? { opacity: 0, y: -9, scale: 0.985 } : { opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: EXIT_MS / 1000, ease: "easeOut" }}
-        className="flex items-center gap-3 rounded-xl border border-border bg-surface p-4 shadow-[var(--shadow-card)] md:p-5 dark:border-white/10 dark:shadow-[0_20px_50px_rgba(0,0,0,0.45)]"
+        className="flex items-center gap-3 rounded-card border border-border bg-surface p-4 shadow-[var(--shadow-card)] md:p-5"
       >
         {/* Dark icon container — stays dark in both themes, like an app glyph */}
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-[10px] bg-[#12211B] text-[#E8F7EE] dark:border dark:border-white/10 dark:bg-[#0A1310] dark:text-[#A5ECC0]">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-card bg-[#12211B] text-[#E8F7EE]">
           <Code2 size={18} strokeWidth={2.25} aria-hidden />
         </span>
         <div className="min-w-0 flex-1">
-          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-muted dark:text-[#8FA89A]">
+          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-muted">
             {label}
           </p>
           {/* min-h reserves two lines on small screens (messages may wrap)
               and one line from sm up, so typing never shifts the layout. */}
-          <p className="mt-1.5 min-h-[3em] text-[15px] font-bold leading-[1.5] tracking-[-0.3px] text-text sm:min-h-[1.5em] lg:text-base dark:text-white">
+          <p className="mt-1.5 min-h-[3em] text-[15px] font-bold leading-[1.5] tracking-[-0.3px] text-text sm:min-h-[1.5em] lg:text-base">
             {visibleText}
             <span
               aria-hidden
@@ -196,7 +195,7 @@ export function TypingSearchCard({ label, messages, suggestions, status, classNa
 
       {/* Status line — decorative "live" caption (reference: dot + caps) */}
       {status && (
-        <p className="mt-6 flex items-center gap-2 text-[10px] uppercase tracking-[0.4px] text-faint select-none">
+        <p className="mt-6 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em] text-faint select-none">
           <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
           {status}
         </p>

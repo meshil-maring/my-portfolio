@@ -17,7 +17,6 @@ export function Process() {
       label="How I Work"
       title={<>From idea to <span className="text-accent">launch.</span></>}
       icon={<Workflow size={18} />}
-      titleClassName="text-[22px] lg:text-[26px]"
     >
       <Reveal>
         <p className="max-w-[62ch] text-[13.5px] leading-[1.65] text-muted">
