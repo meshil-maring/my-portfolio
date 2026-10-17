@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Cursor } from "@/components/ui/Cursor";
+import { ChatWidget } from "@/components/ui/ChatWidget";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -42,6 +43,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </a>
           {children}
           <Cursor />
+          {/* Floating AI assistant — available on every page. */}
+          <ChatWidget />
         </ThemeProvider>
       </body>
     </html>
