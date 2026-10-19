@@ -1,0 +1,101 @@
+[
+  {
+    "source": "portfolio:profile",
+    "kind": "profile",
+    "title": "DS Meshil Maring — portfolio profile",
+    "content": "# DS Meshil Maring\n\nRole: Full-Stack Developer & AI Application Engineer.\nIntro: I design and develop scalable web applications, secure backend systems, and intelligent AI solutions — turning complex problems into reliable digital products.\nAvailability: Open to opportunities & freelance collaborations.\n\n## About\nI'm a Computer Science Engineering student specializing in Data Science and Machine Learning, with hands-on experience building full-stack applications, backend systems, and AI-powered solutions. I enjoy solving practical problems, creating scalable architectures, and turning ambitious ideas into dependable products.\n\nEducation: Bachelor of Technology in Computer Science Engineering, Quest Group of Institutions, Punjab — specialization in Data Science and Machine Learning. Areas: Data Structures and Algorithms, Database Management Systems, Machine Learning, Statistics, Computer Vision, Linear Algebra.\n\n## Contact\nEmail: hello@example.com. Whether you're hiring a software engineer or planning your next digital product, he'd be happy to connect and discuss how we can work together.\nHow to start a project: share what you're building, key features or the problem to solve, timeline and rough budget range, and links to references/specs.\nProject types he takes on: Full-Stack Web Application, AI / RAG Solution, Backend & APIs, Dashboard & CMS, Something else.\nSocials: Email (mailto:hello@example.com), LinkedIn (https://linkedin.com/in/your-handle), GitHub (https://github.com/meshil-maring).",
+    "metadata": { "origin": "client/src/data/site.ts" },
+    "profile_sections": {
+      "site": {
+        "name": "DS Meshil Maring",
+        "role": "Full-Stack Developer & AI Application Engineer",
+        "description": "I design and develop scalable web applications, secure backend systems, and intelligent AI solutions — turning complex problems into reliable digital products.",
+        "availability": "Open to opportunities & freelance collaborations"
+      },
+      "about": {
+        "body": "I'm a Computer Science Engineering student specializing in Data Science and Machine Learning, with hands-on experience building full-stack applications, backend systems, and AI-powered solutions. I enjoy solving practical problems, creating scalable architectures, and turning ambitious ideas into dependable products.",
+        "education": {
+          "degree": "Bachelor of Technology in Computer Science Engineering",
+          "institution": "Quest Group of Institutions, Punjab",
+          "specialization": "Data Science and Machine Learning",
+          "areas": ["Data Structures and Algorithms", "Database Management Systems", "Machine Learning", "Statistics", "Computer Vision", "Linear Algebra"]
+        }
+      },
+      "contact": {
+        "heading": "Let's build something great.",
+        "description": "Whether you're hiring a software engineer or planning your next digital product, I'd be happy to connect and discuss how we can work together.",
+        "email": "hello@example.com",
+        "discuss": "Planning a web app, an AI feature, a backend, or a full product? Share a few details and I'll reply with honest feedback, questions, and a suggested next step — no obligation.",
+        "projectTypes": ["Full-Stack Web Application", "AI / RAG Solution", "Backend & APIs", "Dashboard & CMS", "Something else"],
+        "socials": [
+          { "label": "Email", "href": "mailto:hello@example.com" },
+          { "label": "LinkedIn", "href": "https://linkedin.com/in/your-handle" },
+          { "label": "GitHub", "href": "https://github.com/meshil-maring" }
+        ]
+      }
+    }
+  },
+  {
+    "source": "portfolio:projects",
+    "kind": "project",
+    "title": "Projects",
+    "content": "# Projects\n\n## College AI Assistant (In Progress — Featured Case Study)\nMulti-tenant RAG platform for university workflows, semantic document retrieval, and personalized academic assistance.\nHighlights: Document ingestion, Text chunking, Embeddings, Semantic retrieval, Role-based authorization, Multi-tenant architecture, Academic workflows, Secure data handling.\nStack: React, TypeScript, FastAPI, RAG, PostgreSQL. Note: Currently under development.\n\n## EPM Staffing Services (Live — Recruitment Platform)\nFull-stack hiring platform with job postings, candidate tracking, interview scheduling, and role-based authorization.\nHighlights: Candidate management, Job management, Interview workflows, Role-based authorization, Backend APIs, Database integration.\nStack: React, Express, PostgreSQL.\n\n## ProjectG (Live — Non-Profit Platform)\nCMS and engagement platform with secure administration, content workflows, file storage, and production deployment.\nHighlights: Content management, Administrative dashboards, Media handling, Secure backend APIs, Deployment infrastructure.\nStack: TypeScript, Prisma, Docker.",
+    "metadata": { "origin": "client/src/data/projects.ts" },
+    "profile_sections": {
+      "projects": [
+        { "slug": "college-ai-assistant", "title": "College AI Assistant", "status": "In Progress", "type": "Featured Case Study", "description": "Multi-tenant RAG platform for university workflows, semantic document retrieval, and personalized academic assistance.", "highlights": ["Document ingestion", "Text chunking", "Embeddings", "Semantic retrieval", "Role-based authorization", "Multi-tenant architecture", "Academic workflows", "Secure data handling"], "tags": ["React", "TypeScript", "FastAPI", "RAG", "PostgreSQL"], "note": "Currently under development" },
+        { "slug": "epm-staffing-services", "title": "EPM Staffing Services", "status": "Live", "type": "Recruitment Platform", "description": "Full-stack hiring platform with job postings, candidate tracking, interview scheduling, and role-based authorization.", "highlights": ["Candidate management", "Job management", "Interview workflows", "Role-based authorization", "Backend APIs", "Database integration"], "tags": ["React", "Express", "PostgreSQL"] },
+        { "slug": "projectg", "title": "ProjectG", "status": "Live", "type": "Non-Profit Platform", "description": "CMS and engagement platform with secure administration, content workflows, file storage, and production deployment.", "highlights": ["Content management", "Administrative dashboards", "Media handling", "Secure backend APIs", "Deployment infrastructure"], "tags": ["TypeScript", "Prisma", "Docker"] }
+      ]
+    }
+  },
+  {
+    "source": "portfolio:services",
+    "kind": "service",
+    "title": "Services",
+    "content": "# Services\n\n01 — Full-Stack Web Applications: Responsive frontend interfaces, backend services, databases, and complete business workflows. Stack: React, Node.js, Tailwind CSS, PostgreSQL, Firebase, MongoDB.\n\n02 — AI and RAG Solutions: Document-aware assistants, semantic search, LLM integrations, and intelligent retrieval workflows. Stack: Python, FastAPI, Hugging Face, PostgreSQL, Supabase, React.\n\n03 — Backend and API Development: REST APIs, secure authentication, role-based authorization, database integration, and multi-tenant architecture. Stack: Node.js, Python, FastAPI, Docker, PostgreSQL, Supabase.\n\n04 — Dashboards and CMS Platforms: Custom admin dashboards, content management systems, media workflows, and operational interfaces. Stack: React, Tailwind CSS, PostgreSQL, Supabase, MongoDB, Firebase.",
+    "metadata": { "origin": "client/src/data/services.ts" },
+    "profile_sections": {
+      "services": [
+        { "n": "01", "title": "Full-Stack Web Applications", "description": "Responsive frontend interfaces, backend services, databases, and complete business workflows.", "stack": ["react", "nodedotjs", "tailwindcss", "postgresql", "firebase", "mongodb"] },
+        { "n": "02", "title": "AI and RAG Solutions", "description": "Document-aware assistants, semantic search, LLM integrations, and intelligent retrieval workflows.", "stack": ["python", "fastapi", "huggingface", "postgresql", "supabase", "react"] },
+        { "n": "03", "title": "Backend and API Development", "description": "REST APIs, secure authentication, role-based authorization, database integration, and multi-tenant architecture.", "stack": ["nodedotjs", "python", "fastapi", "docker", "postgresql", "supabase"] },
+        { "n": "04", "title": "Dashboards and CMS Platforms", "description": "Custom admin dashboards, content management systems, media workflows, and operational interfaces.", "stack": ["react", "tailwindcss", "postgresql", "supabase", "mongodb", "firebase"] }
+      ]
+    }
+  },
+  {
+    "source": "portfolio:skills",
+    "kind": "skill",
+    "title": "Skills",
+    "content": "# Skills\n\nFrontend Development: React, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Vite.\nBackend and APIs: Python, FastAPI, Node.js, Express, REST APIs, Authentication, Role-based authorization.\nAI and Machine Learning: RAG, LLMs, Embeddings, Semantic Search, NLP, Hugging Face, Scikit-learn.\nDatabases and Infrastructure: PostgreSQL, Supabase, pgvector, Cloudflare R2, Docker, Git, GitHub.",
+    "metadata": { "origin": "client/src/data/skills.ts" },
+    "profile_sections": {
+      "skills": [
+        { "label": "Frontend Development", "skills": ["React", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind CSS", "Vite"] },
+        { "label": "Backend and APIs", "skills": ["Python", "FastAPI", "Node.js", "Express", "REST APIs", "Authentication", "Role-based authorization"] },
+        { "label": "AI and Machine Learning", "skills": ["RAG", "LLMs", "Embeddings", "Semantic Search", "NLP", "Hugging Face", "Scikit-learn"] },
+        { "label": "Databases and Infrastructure", "skills": ["PostgreSQL", "Supabase", "pgvector", "Cloudflare R2", "Docker", "Git", "GitHub"] }
+      ]
+    }
+  },
+  {
+    "source": "portfolio:process",
+    "kind": "process",
+    "title": "How he works (process)",
+    "content": "# How he works\n\n01 Understand — Clarify the problem, user needs, and project requirements.\n02 Plan & Design — Map user flows and design clear, intuitive interfaces.\n03 Architecture & Database — When needed, plan the application structure, APIs, and database schema to support the project's features.\n04 Develop — Build the interface, implement backend logic, and connect the application's components.\n05 Test & Refine — Check functionality, responsiveness, and usability, then refine the experience.\n06 Deploy & Improve — Launch the project, document the setup, and refine it based on feedback.",
+    "metadata": { "origin": "client/src/data/process.ts" },
+    "profile_sections": {
+      "process": [
+        { "n": "01", "title": "Understand", "description": "Clarify the problem, user needs, and project requirements." },
+        { "n": "02", "title": "Plan & Design", "description": "Map user flows and design clear, intuitive interfaces." },
+        { "n": "03", "title": "Architecture & Database", "description": "When needed, plan the application structure, APIs, and database schema to support the project's features." },
+        { "n": "04", "title": "Develop", "description": "Build the interface, implement backend logic, and connect the application's components." },
+        { "n": "05", "title": "Test & Refine", "description": "Check functionality, responsiveness, and usability, then refine the experience." },
+        { "n": "06", "title": "Deploy & Improve", "description": "Launch the project, document the setup, and refine it based on feedback." }
+      ]
+    }
+  }
+]
+
+

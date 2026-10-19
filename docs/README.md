@@ -31,6 +31,10 @@ docs/
 │   ├── 10-content-model.md + 11-tokens-reference.md (build from these)
 │   ├── 12-accessibility.md … 14-implementation.md (checklists)
 │   ├── CHANGELOG.md + proposals/ (room for future updates)
+├── backend/                  ← AI assistant backend (FastAPI + pgvector RAG; code in server/)
+│   ├── 01-architecture.md (system design, decisions, roadmap)
+│   ├── 02-data-model.md (PostgreSQL/pgvector schema + R2 layout)
+│   └── 03-api-contract.md (endpoints + frontend integration)
 ├── animation/
 │   ├── 01-motion-setup.md
 │   └── 02-animation-patterns.md

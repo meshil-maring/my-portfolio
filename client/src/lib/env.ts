@@ -9,4 +9,10 @@ export const env = {
   aiBaseUrl: process.env.AI_BASE_URL ?? "https://api.groq.com/openai/v1",
   /** Chat model id served by the provider above. */
   aiModel: process.env.AI_MODEL ?? "llama-3.3-70b-versatile",
+  /**
+   * FastAPI RAG backend (server/). When set, /api/chat validates the request
+   * and proxies to `$CHAT_BACKEND_URL/api/chat` instead of answering locally
+   * (docs/backend/03-api-contract.md). Unset → standalone mode.
+   */
+  chatBackendUrl: process.env.CHAT_BACKEND_URL,
 } as const;

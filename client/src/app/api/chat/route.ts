@@ -116,6 +116,33 @@ export async function POST(req: NextRequest) {
   const messages = parseMessages(body);
   if (!messages) return error("bad_request", 400);
 
+  // Proxy mode (docs/backend/03-api-contract.md): when CHAT_BACKEND_URL is
+  // set, the FastAPI backend owns the key + RAG; this route stays a thin
+  // validating pass-through with the exact same wire contract. The visitor
+  // IP is forwarded so the backend's per-IP rate limit stays accurate.
+  if (env.chatBackendUrl) {
+    let backend: Response;
+    try {
+      backend = await fetch(`${env.chatBackendUrl}/api/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Forwarded-For": ip },
+        body: JSON.stringify({ messages }),
+        signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
+      });
+    } catch {
+      return error("upstream_unreachable", 502);
+    }
+    if (!backend.ok || !backend.body) return error("upstream_error", 502);
+    return new Response(backend.body, {
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-cache, no-transform",
+        "X-Accel-Buffering": "no",
+      },
+    });
+  }
+
+  // Standalone mode: the AI key is required to answer directly.
   if (!env.aiApiKey) return error("not_configured", 500);
 
   let upstream: Response;
