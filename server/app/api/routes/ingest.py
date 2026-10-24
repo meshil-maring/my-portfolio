@@ -20,7 +20,7 @@ from app.db.session import get_session
 from app.models import Chunk, Document, ProfileSection
 from app.schemas import IngestRequest, IngestResponse
 from app.services.chunking import chunk_text
-from app.services.embeddings import EmbeddingError, embed_texts
+from app.services.embeddings import EmbeddingError, embed_passages
 from app.services.storage import mirror_raw
 
 logger = logging.getLogger(__name__)
@@ -76,7 +76,7 @@ async def ingest(
         content, size=settings.chunk_size, overlap=settings.chunk_overlap
     )
     try:
-        vectors = await embed_texts(pieces)
+        vectors = await embed_passages(pieces)
     except EmbeddingError:
         logger.exception("ingest failed: embeddings provider error")
         await session.rollback()

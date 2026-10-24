@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS chunks (
     ordinal     integer NOT NULL,
     content     text NOT NULL,
     metadata    jsonb NOT NULL DEFAULT '{}'::jsonb,
-    embedding   vector(1024),                   -- MUST match EMBEDDING_DIMS env
+    embedding   vector(768),                    -- MUST match EMBEDDING_DIMS env
     UNIQUE (document_id, ordinal)
 );
 
