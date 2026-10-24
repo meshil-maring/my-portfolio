@@ -1,5 +1,13 @@
 # Design System CHANGELOG
 
+## [1.5] — 2026-10-17 — Services "What I offer": chips, hover lift, closing CTA
+
+- CHANGED: 07-sections, 10-content-model — each featured service panel now shows three scannable capability chips (`Service.deliverables`, rendered with the §05 `Tag` component; every chip traceable to existing descriptions/highlights — no new claims), the panel surface follows the §05 card hover contract (`-2px` lift + accent border, 200ms; flattened globally under prefers-reduced-motion), and the section closes with a centered CTA row ("Not sure which one fits your project?" + secondary Button → #discuss, matching the Hero/Contact CTA language) (proposal: proposals/2026-10-17-services-offer-polish.md).
+
+## [1.4] — 2026-10-16 — Floating AI assistant chat widget
+
+- ADDED: components/ui/ChatWidget + ChatPanel — floating assistant launcher + panel dialog (viewport-clamped, existing tokens only, streaming replies via the /api/chat route handler, per-IP rate limiting, session-local conversation state) (proposal: proposals/2026-10-16-floating-ai-assistant.md; entry added retroactively with 1.5).
+
 ## [1.3.1] — 2026-10-15 — Consistency pass (tokens, one header, one label style)
 
 - FIXED: 11-tokens, 14-implementation — registered `--radius-card` / `--radius-btn` / `--radius-chip` / `--shadow-card` in `@theme inline` (`globals.css`). Until now `rounded-card`, `rounded-btn`, `rounded-chip` compiled to **nothing** site-wide (verified against built CSS), so cards, buttons, tags and inputs rendered square; all ad-hoc radii (`rounded-2xl`, `rounded-[10px]`, `rounded-[7px]`, `rounded-[18px]`, `rounded-[10px]` icon tiles) now use the tokens (card 12 / button 8 / chip 6).

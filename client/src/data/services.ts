@@ -10,6 +10,7 @@ export const services: Service[] = [
     icon: "Code2",
     accentWord: "Applications",
     stack: ["react", "nodedotjs", "tailwindcss", "postgresql", "firebase", "mongodb"],
+    deliverables: ["Responsive frontends", "REST APIs & auth", "Database design"],
   },
   {
     n: "02",
@@ -21,6 +22,7 @@ export const services: Service[] = [
     // the title + BrandIcons keys for the floating desktop/mobile stack tiles.
     accentWord: "Solutions",
     stack: ["python", "fastapi", "huggingface", "postgresql", "supabase", "react"],
+    deliverables: ["RAG pipelines", "Semantic search", "LLM integrations"],
   },
   {
     n: "03",
@@ -32,6 +34,7 @@ export const services: Service[] = [
     // the title + BrandIcons keys for the floating desktop/mobile stack tiles.
     accentWord: "Development",
     stack: ["nodedotjs", "python", "fastapi", "docker", "postgresql", "supabase"],
+    deliverables: ["Secure REST APIs", "Role-based access", "Multi-tenant design"],
   },
   {
     n: "04",
@@ -43,5 +46,6 @@ export const services: Service[] = [
     // the title + BrandIcons keys for the floating desktop/mobile stack tiles.
     accentWord: "Platforms",
     stack: ["react", "tailwindcss", "postgresql", "supabase", "mongodb", "firebase"],
+    deliverables: ["Admin dashboards", "Content workflows", "Media handling"],
   },
 ];

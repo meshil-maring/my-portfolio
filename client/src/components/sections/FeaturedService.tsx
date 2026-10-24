@@ -7,6 +7,7 @@ import { motion, useInView, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/cn";
 import { Reveal } from "@/components/ui/Reveal";
 import { brandMeta, type BrandKey } from "@/components/ui/BrandIcons";
+import { Tag } from "@/components/ui/Tag";
 import { featuredTitleClass } from "@/lib/typography";
 import type { Service } from "@/types/portfolio";
 
@@ -108,7 +109,7 @@ export function FeaturedService({
 
   return (
     <Reveal className={className}>
-      <div ref={panelRef} className="relative overflow-hidden rounded-card border border-border bg-surface p-5 shadow-[var(--shadow-card)] transition-colors duration-200 md:p-6 lg:p-7">
+      <div ref={panelRef} className="relative overflow-hidden rounded-card border border-border bg-surface p-5 shadow-[var(--shadow-card)] transition-[transform,border-color] duration-200 hover:-translate-y-0.5 hover:border-accent md:p-6 lg:p-7">
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="absolute -left-16 -top-24 h-56 w-56 rounded-full bg-accent-soft blur-[90px]" />
           <div className="absolute -bottom-24 right-8 h-64 w-64 rounded-full bg-accent/10 blur-[100px]" />
@@ -138,6 +139,18 @@ export function FeaturedService({
             <p className="mt-3 max-w-[46ch] text-[14px] leading-[1.75] text-muted lg:text-[15px]">
               {service.description}
             </p>
+
+            {/* Scannable capability chips (§05 tags, proposal
+                2026-10-17-services-offer-polish) — only what projects prove */}
+            {service.deliverables && service.deliverables.length > 0 && (
+              <ul aria-label="What's included" className="mt-4 flex flex-wrap gap-2">
+                {service.deliverables.map((item) => (
+                  <li key={item}>
+                    <Tag>{item}</Tag>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
           <div className={cn("relative", mirror && "lg:order-1")}>

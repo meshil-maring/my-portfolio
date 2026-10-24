@@ -3,6 +3,7 @@ import { services } from "@/data/services";
 import { Section } from "@/components/layout/Section";
 import { FeaturedService } from "@/components/sections/FeaturedService";
 import { Reveal } from "@/components/ui/Reveal";
+import { Button } from "@/components/ui/Button";
 
 // design-system §07 (proposal 2026-10-14-services-zigzag-flow): the four
 // featured panels flow in a zigzag — 01 left · 02 right · 03 left · 04 right
@@ -75,6 +76,18 @@ export function Services() {
           />
         </Fragment>
       ))}
+      {/* Closes the Z-flow with the section's conversion path (proposal
+          2026-10-17-services-offer-polish) — same CTA language as Contact. */}
+      <Reveal className="mt-8 md:mt-10">
+        <div className="flex flex-col items-center gap-3 text-center">
+          <p className="text-sm text-muted">
+            Not sure which one fits your project?
+          </p>
+          <Button variant="secondary" href="#discuss">
+            Discuss a project
+          </Button>
+        </div>
+      </Reveal>
     </Section>
   );
 }

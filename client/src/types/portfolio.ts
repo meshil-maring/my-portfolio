@@ -28,6 +28,9 @@ export interface Service {
   accentWord?: string;
   // Brand-logo tiles shown on the featured layout (keys into BrandIcons)
   stack?: string[];
+  // Scannable capability chips under the description (§07, proposal
+  // 2026-10-17-services-offer-polish) — 2-4 short items, only what projects prove
+  deliverables?: string[];
 }
 
 export interface ProcessStep {
