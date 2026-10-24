@@ -16,15 +16,32 @@ interface ChatWidgetProps {
 // renders over the panel. Esc closes the dialog.
 export function ChatWidget({ className }: ChatWidgetProps) {
   const [open, setOpen] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
 
   useEffect(() => {
     if (!open) return;
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        if (fullscreen) setFullscreen(false);
+        else setOpen(false);
+      }
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open]);
+  }, [open, fullscreen]);
+
+  function handleToggleOpen() {
+    setOpen((value) => {
+      const next = !value;
+      if (!next) setFullscreen(false);
+      return next;
+    });
+  }
+
+  function handleClose() {
+    setFullscreen(false);
+    setOpen(false);
+  }
 
   return (
     <div
@@ -33,21 +50,29 @@ export function ChatWidget({ className }: ChatWidgetProps) {
         className,
       )}
     >
-      {open && <ChatPanel onClose={() => setOpen(false)} />}
-      <button
-        type="button"
-        aria-label={open ? assistant.closeLabel : assistant.launcherLabel}
-        aria-expanded={open}
-        aria-controls={open ? "ai-assistant-panel" : undefined}
-        onClick={() => setOpen((value) => !value)}
-        className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-accent-text shadow-[0_8px_24px_rgba(20,50,32,0.28)] transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-      >
-        {open ? (
-          <X className="h-5 w-5" aria-hidden="true" />
-        ) : (
-          <MessageCircle className="h-5 w-5" aria-hidden="true" />
-        )}
-      </button>
+      {open && (
+        <ChatPanel
+          onClose={handleClose}
+          fullscreen={fullscreen}
+          onToggleFullscreen={() => setFullscreen((value) => !value)}
+        />
+      )}
+      {!(open && fullscreen) && (
+        <button
+          type="button"
+          aria-label={open ? assistant.closeLabel : assistant.launcherLabel}
+          aria-expanded={open}
+          aria-controls={open ? "ai-assistant-panel" : undefined}
+          onClick={handleToggleOpen}
+          className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-accent-text shadow-[0_8px_24px_rgba(20,50,32,0.28)] transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >
+          {open ? (
+            <X className="h-5 w-5" aria-hidden="true" />
+          ) : (
+            <MessageCircle className="h-5 w-5" aria-hidden="true" />
+          )}
+        </button>
+      )}
     </div>
   );
 }

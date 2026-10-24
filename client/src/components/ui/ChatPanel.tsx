@@ -2,13 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { FormEvent, KeyboardEvent } from "react";
-import { Send, Sparkles, Square, X } from "lucide-react";
+import { Maximize2, Minimize2, Send, Sparkles, Square, X } from "lucide-react";
 import { assistant } from "@/data/assistant";
 import { cn } from "@/lib/cn";
 import type { ChatMessage } from "@/types/chat";
 
 interface ChatPanelProps {
   onClose: () => void;
+  fullscreen?: boolean;
+  onToggleFullscreen?: () => void;
 }
 
 // Field styling mirrors DiscussProject's fieldClass (design-system §05:
@@ -23,7 +25,11 @@ const bubbleClass =
 // POST /api/chat; the conversation lives only in this component's state and
 // resets when the panel closes. The dialog is non-modal (Esc handled by the
 // launcher in ChatWidget), so page content stays usable behind it.
-export function ChatPanel({ onClose }: ChatPanelProps) {
+export function ChatPanel({
+  onClose,
+  fullscreen = false,
+  onToggleFullscreen,
+}: ChatPanelProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [status, setStatus] = useState<"idle" | "sending">("idle");
@@ -125,7 +131,12 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
       id="ai-assistant-panel"
       role="dialog"
       aria-label={assistant.panelTitle}
-      className="flex h-[min(68vh,560px)] w-[min(92vw,380px)] flex-col overflow-hidden rounded-card border border-border bg-surface shadow-[0_16px_48px_rgba(20,50,32,0.18)] dark:shadow-[0_16px_48px_rgba(0,0,0,0.45)]"
+      className={cn(
+        "flex flex-col overflow-hidden border border-border bg-surface shadow-[0_16px_48px_rgba(20,50,32,0.18)] dark:shadow-[0_16px_48px_rgba(0,0,0,0.45)]",
+        fullscreen
+          ? "fixed inset-3 z-50 rounded-card sm:inset-6"
+          : "h-[min(68vh,560px)] w-[min(92vw,380px)] rounded-card",
+      )}
     >
       {/* Header */}
       <header className="flex items-center justify-between gap-3 border-b border-border bg-soft px-4 py-3">
@@ -145,14 +156,34 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
             </p>
           </div>
         </div>
-        <button
-          type="button"
-          aria-label={assistant.closeLabel}
-          onClick={onClose}
-          className="flex h-9 w-9 items-center justify-center rounded-full text-muted transition-colors hover:bg-soft hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        >
-          <X className="h-4 w-4" aria-hidden="true" />
-        </button>
+        <div className="flex items-center gap-1">
+          {onToggleFullscreen && (
+            <button
+              type="button"
+              aria-label={
+                fullscreen
+                  ? assistant.exitFullscreenLabel
+                  : assistant.fullscreenLabel
+              }
+              onClick={onToggleFullscreen}
+              className="flex h-9 w-9 items-center justify-center rounded-full text-muted transition-colors hover:bg-soft hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              {fullscreen ? (
+                <Minimize2 className="h-4 w-4" aria-hidden="true" />
+              ) : (
+                <Maximize2 className="h-4 w-4" aria-hidden="true" />
+              )}
+            </button>
+          )}
+          <button
+            type="button"
+            aria-label={assistant.closeLabel}
+            onClick={onClose}
+            className="flex h-9 w-9 items-center justify-center rounded-full text-muted transition-colors hover:bg-soft hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            <X className="h-4 w-4" aria-hidden="true" />
+          </button>
+        </div>
       </header>
 
       {/* Messages */}

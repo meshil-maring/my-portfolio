@@ -21,4 +21,6 @@ export const assistant = {
   rateLimitedMessage: "Too many messages right now — wait a moment and retry.",
   notConfiguredMessage:
     "The assistant isn't configured yet — add AI_API_KEY to .env.local.",
+  fullscreenLabel: "Expand to full screen",
+  exitFullscreenLabel: "Exit full screen",
 } as const;
