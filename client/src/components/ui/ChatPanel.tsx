@@ -38,6 +38,16 @@ export function ChatPanel({
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const abortRef = useRef<AbortController | null>(null);
+  const accumulatedRef = useRef("");
+  const displayedRef = useRef("");
+  const typingRef = useRef<number | null>(null);
+
+  function stopTyping() {
+    if (typingRef.current !== null) {
+      window.clearInterval(typingRef.current);
+      typingRef.current = null;
+    }
+  }
 
   // Focus the composer as soon as the panel opens.
   useEffect(() => {
@@ -45,7 +55,10 @@ export function ChatPanel({
   }, []);
 
   // Abort any in-flight stream if the panel unmounts (closed or navigated).
-  useEffect(() => () => abortRef.current?.abort(), []);
+  useEffect(() => () => {
+    abortRef.current?.abort();
+    stopTyping();
+  }, []);
 
   // Keep the newest message in view while streaming.
   useEffect(() => {
@@ -82,17 +95,36 @@ export function ChatPanel({
 
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
-      let accumulated = "";
+      accumulatedRef.current = "";
+      displayedRef.current = "";
+
+      // Reveal the incoming text word-by-word so the reply feels live
+      // instead of appearing all at once when the stream finishes.
+      typingRef.current = window.setInterval(() => {
+        if (displayedRef.current.length < accumulatedRef.current.length) {
+          const nextSpace = accumulatedRef.current.indexOf(" ", displayedRef.current.length);
+          const end =
+            nextSpace === -1 ? accumulatedRef.current.length : nextSpace + 1;
+          displayedRef.current = accumulatedRef.current.slice(0, end);
+          setMessages([...history, { role: "assistant", content: displayedRef.current }]);
+        }
+      }, 35);
+
       for (;;) {
         const { done, value } = await reader.read();
         if (done) break;
-        accumulated += decoder.decode(value, { stream: true });
-        setMessages([...history, { role: "assistant", content: accumulated }]);
+        accumulatedRef.current += decoder.decode(value, { stream: true });
       }
 
+      // Make sure the full reply is shown once the stream ends.
+      stopTyping();
+      displayedRef.current = accumulatedRef.current;
+      setMessages([...history, { role: "assistant", content: displayedRef.current }]);
+
       // Stream opened but produced nothing — surface the generic error.
-      if (!accumulated.trim()) throw new Error(assistant.errorMessage);
+      if (!accumulatedRef.current.trim()) throw new Error(assistant.errorMessage);
     } catch (err) {
+      stopTyping();
       const aborted = err instanceof DOMException && err.name === "AbortError";
       // Drop a placeholder that never received tokens; keep partial output.
       setMessages((current) => {
