@@ -25,6 +25,24 @@ const bubbleClass =
 // POST /api/chat; the conversation lives only in this component's state and
 // resets when the panel closes. The dialog is non-modal (Esc handled by the
 // launcher in ChatWidget), so page content stays usable behind it.
+const COOKIE_NAME = "chat_conversation";
+const COOKIE_DAYS = 7;
+
+function readCookie(name: string): string | null {
+  if (typeof document === "undefined") return null;
+  const match = document.cookie.match(
+    new RegExp("(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, "\\$1") + "=([^;]*)"),
+  );
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
+function writeCookie(name: string, value: string, days: number) {
+  if (typeof document === "undefined") return;
+  const expires = new Date(Date.now() + days * 864e5).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
+}
+
+
 export function ChatPanel({
   onClose,
   fullscreen = false,
@@ -34,6 +52,7 @@ export function ChatPanel({
   const [input, setInput] = useState("");
   const [status, setStatus] = useState<"idle" | "sending">("idle");
   const [error, setError] = useState<string | null>(null);
+  const [loaded, setLoaded] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -59,6 +78,30 @@ export function ChatPanel({
     abortRef.current?.abort();
     stopTyping();
   }, []);
+
+  // Restore conversation from cookie on mount.
+  useEffect(() => {
+    const raw = readCookie(COOKIE_NAME);
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw) as ChatMessage[];
+        if (Array.isArray(parsed)) setMessages(parsed);
+      } catch {
+        // ignore corrupt cookie
+      }
+    }
+    setLoaded(true);
+  }, []);
+
+  // Persist conversation to cookie whenever it changes.
+  useEffect(() => {
+    if (!loaded) return;
+    try {
+      writeCookie(COOKIE_NAME, JSON.stringify(messages), COOKIE_DAYS);
+    } catch {
+      // ignore quota/serialization errors
+    }
+  }, [messages, loaded]);
 
   // Keep the newest message in view while streaming.
   useEffect(() => {
