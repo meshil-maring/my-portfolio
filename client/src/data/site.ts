@@ -84,7 +84,32 @@ export const contact = {
   description:
     "Whether you're hiring a software engineer or planning your next digital product, I'd be happy to connect and discuss how we can work together.",
   primaryCta: { label: "Discuss a Project", href: "#discuss" },
-  secondaryCta: { label: "Recruitment Inquiry", href: "mailto:hello@example.com" },
+  secondaryCta: { label: "Recruitment Inquiry", href: "#recruitment" },
+};
+
+// Recruitment Inquiry section (id #recruitment). Client-side only mailto form.
+export const recruitment = {
+  description:
+    "Hiring for a full-stack, backend, or AI engineering role? Share the details and I'll get back with my resume, availability, and next steps — no obligation.",
+  checklistTitle: "What helps me reply faster",
+  checklist: [
+    "Role title and seniority level",
+    "Company and team size",
+    "Tech stack and responsibilities",
+    "Timeline, location / remote policy",
+    "Compensation range (optional)",
+  ],
+  roles: [
+    "Full-Stack Developer",
+    "Backend Engineer",
+    "AI / ML Engineer",
+    "Frontend Developer",
+    "Internship",
+    "Freelance / Contract",
+    "Other",
+  ],
+  submitLabel: "Send recruitment inquiry",
+  email: "hello@example.com",
 };
 
 // "Discuss a Project" section (id #discuss, sits directly above Contact).

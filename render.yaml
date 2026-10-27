@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: portfolio-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile.server
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: LLM_API_KEY
+        sync: false
+      - key: EMBEDDING_API_KEY
+        sync: false
+      - key: INGEST_TOKEN
+        sync: false
+      - key: CORS_ORIGINS
+        value: https://your-frontend-domain.com
+  - type: web
+    name: portfolio-web
+    runtime: docker
+    dockerfilePath: ./Dockerfile.client
+    plan: free
+    envVars:
+      - key: CHAT_BACKEND_URL
+        value: https://portfolio-api.onrender.com

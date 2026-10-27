@@ -1,6 +1,5 @@
-import type { Project } from "@/types/portfolio";
+﻿import type { Project } from "@/types/portfolio";
 
-// design-system v1.1 §07 + §10 — real projects only, honest statuses
 export const projects: Project[] = [
   {
     slug: "college-ai-assistant",
@@ -8,18 +7,14 @@ export const projects: Project[] = [
     status: "In Progress",
     type: "Featured Case Study",
     description:
-      "Multi-tenant RAG platform for university workflows, semantic document retrieval, and personalized academic assistance.",
+      "Multi-tenant RAG platform for university workflows.",
     highlights: [
-      "Document ingestion",
-      "Text chunking",
-      "Embeddings",
-      "Semantic retrieval",
-      "Role-based authorization",
-      "Multi-tenant architecture",
+      "Semantic document retrieval",
+      "Role-aware access control",
       "Academic workflows",
-      "Secure data handling",
+      "Multi-tenant architecture",
     ],
-    tags: ["React", "TypeScript", "FastAPI", "RAG", "PostgreSQL"],
+    tags: ["React", "TypeScript", "FastAPI", "PostgreSQL", "Supabase", "RAG"],
     image: "/projects/college-ai-assistant.png",
     featured: true,
     note: "Currently under development",
@@ -29,18 +24,17 @@ export const projects: Project[] = [
     title: "EPM Staffing Services",
     status: "Live",
     type: "Recruitment Platform",
-    description:
-      "Full-stack hiring platform with job postings, candidate tracking, interview scheduling, and role-based authorization.",
+    description: "Full-stack recruitment platform.",
     highlights: [
-      "Candidate management",
-      "Job management",
-      "Interview workflows",
-      "Role-based authorization",
-      "Backend APIs",
-      "Database integration",
+      "Job posting and candidate tracking",
+      "Interview scheduling",
+      "Role-based authentication",
+      "Secure recruitment workflows",
     ],
-    tags: ["React", "Express", "PostgreSQL"],
+    tags: ["React", "Node.js", "Express", "PostgreSQL"],
     image: "/projects/epm-staffing.png",
+    liveUrl: "https://www.epmstaffingservices.com/",
+
     featured: true,
   },
   {
@@ -48,16 +42,16 @@ export const projects: Project[] = [
     title: "ProjectG",
     status: "Live",
     type: "Non-Profit Platform",
-    description:
-      "CMS and engagement platform with secure administration, content workflows, file storage, and production deployment.",
+    description: "Non-profit CMS and engagement platform.",
     highlights: [
-      "Content management",
-      "Administrative dashboards",
-      "Media handling",
-      "Secure backend APIs",
+      "Content management dashboard",
+      "Secure authentication and RBAC",
+      "Media storage and content workflows",
       "Deployment infrastructure",
     ],
-    tags: ["TypeScript", "Prisma", "Docker"],
+    tags: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL", "Prisma"],
+    liveUrl: "https://projectgmanipur.com/",
+
     image: "/projects/projectg.png",
     featured: true,
   },

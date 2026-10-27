@@ -18,7 +18,7 @@ const socialIcons: Record<string, React.ComponentType<{ className?: string }>> =
 
 export function Contact() {
   return (
-    <Section id="contact" number="07" label="Contact" title={<span className="sr-only">Contact</span>}>
+    <Section id="contact" number="08" label="Contact" title={<span className="sr-only">Contact</span>}>
       <Reveal>
         <div className="rounded-card border border-border bg-soft px-5 py-8 text-center md:px-8">
           <Container className="max-w-[640px]">

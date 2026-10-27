@@ -21,7 +21,7 @@ export const services: Service[] = [
     // Featured-panel fields (same treatment as 01): accent word at the end of
     // the title + BrandIcons keys for the floating desktop/mobile stack tiles.
     accentWord: "Solutions",
-    stack: ["python", "fastapi", "huggingface", "postgresql", "supabase", "react"],
+    stack: ["python", "fastapi", "huggingface", "postgresql", "jina", "openrouter"],
     deliverables: ["RAG pipelines", "Semantic search", "LLM integrations"],
   },
   {

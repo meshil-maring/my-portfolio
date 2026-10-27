@@ -1,4 +1,4 @@
-import { Code2, BrainCircuit, LayoutGrid, GraduationCap, Mail, Workflow, MessagesSquare } from "lucide-react";
+import { Code2, BrainCircuit, LayoutGrid, GraduationCap, Mail, Workflow, MessagesSquare, Briefcase } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { Container } from "./Container";
 import { GlassNumber } from "@/components/ui/GlassNumber";
@@ -26,7 +26,8 @@ const iconsByNumber: Record<string, React.ReactNode> = {
   "04": <GraduationCap size={18} />,
   "05": <Workflow size={18} />,
   "06": <MessagesSquare size={18} />,
-  "07": <Mail size={18} />,
+  "07": <Briefcase size={18} />,
+  "08": <Mail size={18} />,
 };
 
 const fallbackIcon = <LayoutGrid size={18} />;

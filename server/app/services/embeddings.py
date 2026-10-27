@@ -23,7 +23,10 @@ async def embed_texts(texts: list[str], *, task: str | None = None) -> list[list
         try:
             response = await client.post(
                 f"{settings.embedding_base_url.rstrip('/')}/embeddings",
-                headers={"Authorization": f"Bearer {settings.embedding_api_key}"},
+                headers={
+                    "Authorization": f"Bearer {settings.embedding_api_key}",
+                    "Accept": "application/json",
+                },
                 json=payload,
             )
         except httpx.HTTPError as exc:  # connect/timeout/TLS
