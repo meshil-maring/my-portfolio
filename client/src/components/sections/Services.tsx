@@ -21,41 +21,51 @@ const RIGHT_INNER = "30%";
 // accent node dots touching both panels; a straight vertical link below lg
 // where panels stack full-width. Decorative only (aria-hidden).
 function FlowConnector({ upperLeft }: { upperLeft: boolean }) {
-  const start = upperLeft ? LEFT_INNER : RIGHT_INNER;
-  const end = upperLeft ? RIGHT_INNER : LEFT_INNER;
+  const start = upperLeft ? 37 : 63;
+  const end = upperLeft ? 63 : 37;
+  const d = `M ${start},0 C ${start},33 ${end},67 ${end},100`;
   return (
-    <Reveal className="relative h-9 lg:h-24">
-      <svg aria-hidden className="absolute inset-0 h-full w-full overflow-visible">
-        {/* Mobile / tablet: vertical link between stacked panels */}
-        <g className="lg:hidden">
-          <line
-            x1="50%"
-            y1="0"
-            x2="50%"
-            y2="100%"
-            className="stroke-accent/70"
-            strokeWidth={1.5}
-            strokeDasharray="5 6"
-          />
-          <circle cx="50%" cy="0" r={3.5} className="fill-accent" />
-          <circle cx="50%" cy="100%" r={3.5} className="fill-accent" />
-        </g>
-        {/* lg+: zigzag diagonal from the upper panel's inner edge down to
-            the lower panel's inner edge */}
-        <g className="hidden lg:block">
-          <line
-            x1={start}
-            y1="0"
-            x2={end}
-            y2="100%"
-            className="stroke-accent/70"
-            strokeWidth={1.5}
-            strokeDasharray="6 7"
-          />
-          <circle cx={start} cy="0" r={4} className="fill-accent" />
-          <circle cx={end} cy="100%" r={4} className="fill-accent" />
-        </g>
+    <Reveal className="relative h-7 lg:h-20">
+      {/* Mobile / tablet: vertical link between stacked panels */}
+      <svg aria-hidden className="absolute inset-0 h-full w-full overflow-visible lg:hidden">
+        <line
+          x1="50%"
+          y1="0"
+          x2="50%"
+          y2="100%"
+          className="stroke-accent/70 mesh-flow-march-v"
+          strokeWidth={1.5}
+          strokeDasharray="5 6"
+        />
       </svg>
+      <span aria-hidden className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-accent lg:hidden" />
+      <span aria-hidden className="absolute left-1/2 bottom-0 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-accent lg:hidden" />
+      {/* lg+: S-curve from the upper panel's inner edge down to the lower panel's inner edge */}
+      <svg
+        aria-hidden
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        className="absolute inset-0 hidden h-full w-full overflow-visible lg:block"
+      >
+        <path
+          d={d}
+          fill="none"
+          className="stroke-accent/70 mesh-flow-march-h"
+          strokeWidth={1.5}
+          strokeDasharray="6 7"
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
+      <span
+        aria-hidden
+        className="absolute top-0 hidden h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-accent lg:block"
+        style={{ left: `${start}%` }}
+      />
+      <span
+        aria-hidden
+        className="absolute bottom-0 hidden h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-accent lg:block"
+        style={{ left: `${end}%` }}
+      />
     </Reveal>
   );
 }

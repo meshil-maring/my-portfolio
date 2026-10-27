@@ -314,6 +314,15 @@ html.has-custom-cursor textarea {
   will-change: transform;
 }
 
+/* Marching-ants flow for Services connector lines */
+@keyframes mesh-flow-march-h {
+  to { stroke-dashoffset: -13; }
+}
+@keyframes mesh-flow-march-v {
+  to { stroke-dashoffset: -11; }
+}
+.mesh-flow-march-h { animation: mesh-flow-march-h 0.55s linear infinite; }
+.mesh-flow-march-v { animation: mesh-flow-march-v 0.55s linear infinite; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
