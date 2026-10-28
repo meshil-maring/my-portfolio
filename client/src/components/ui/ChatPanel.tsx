@@ -133,11 +133,13 @@ export function ChatPanel({
       });
 
       let serverMessage: string | null = null;
-      try {
-        const data = (await res.json()) as { message?: unknown };
-        if (typeof data?.message === "string") serverMessage = data.message;
-      } catch {
-        // body may be empty or non-JSON
+      if (!res.ok) {
+        try {
+          const data = (await res.json()) as { message?: unknown };
+          if (typeof data?.message === "string") serverMessage = data.message;
+        } catch {
+          // body may be empty or non-JSON
+        }
       }
 
       if (res.status === 429)
