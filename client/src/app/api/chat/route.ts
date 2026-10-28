@@ -132,7 +132,19 @@ export async function POST(req: NextRequest) {
     } catch {
       return error("upstream_unreachable", 502);
     }
-    if (!backend.ok || !backend.body) return error("upstream_error", 502);
+    if (!backend.ok || !backend.body) {
+      if (backend.status === 500) {
+        return Response.json(
+          {
+            error: "not_configured",
+            message:
+              "The assistant backend isn't configured — set LLM_API_KEY (and EMBEDDING_API_KEY) in the backend's environment, then redeploy.",
+          },
+          { status: 500 },
+        );
+      }
+      return error("upstream_error", 502);
+    }
     return new Response(backend.body, {
       headers: {
         "Content-Type": "text/plain; charset=utf-8",
@@ -143,7 +155,16 @@ export async function POST(req: NextRequest) {
   }
 
   // Standalone mode: the AI key is required to answer directly.
-  if (!env.aiApiKey) return error("not_configured", 500);
+  if (!env.aiApiKey) {
+    return Response.json(
+      {
+        error: "not_configured",
+        message:
+          "The assistant isn't configured — set AI_API_KEY in your hosting environment (or CHAT_BACKEND_URL to use the backend).",
+      },
+      { status: 500 },
+    );
+  }
 
   let upstream: Response;
   try {

@@ -132,8 +132,18 @@ export function ChatPanel({
         signal: controller.signal,
       });
 
-      if (res.status === 429) throw new Error(assistant.rateLimitedMessage);
-      if (res.status === 500) throw new Error(assistant.notConfiguredMessage);
+      let serverMessage: string | null = null;
+      try {
+        const data = (await res.json()) as { message?: unknown };
+        if (typeof data?.message === "string") serverMessage = data.message;
+      } catch {
+        // body may be empty or non-JSON
+      }
+
+      if (res.status === 429)
+        throw new Error(serverMessage ?? assistant.rateLimitedMessage);
+      if (res.status === 500)
+        throw new Error(serverMessage ?? assistant.notConfiguredMessage);
       if (!res.ok || !res.body) throw new Error(assistant.errorMessage);
 
       const reader = res.body.getReader();

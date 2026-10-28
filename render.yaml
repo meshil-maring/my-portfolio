@@ -14,7 +14,7 @@ services:
       - key: INGEST_TOKEN
         sync: false
       - key: CORS_ORIGINS
-        value: https://your-frontend-domain.com
+        value: https://my-portfolio-5r77.onrender.com
   - type: web
     name: portfolio-web
     runtime: docker

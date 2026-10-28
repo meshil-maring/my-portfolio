@@ -20,7 +20,7 @@ export const assistant = {
   errorMessage: "Something went wrong — please try again in a moment.",
   rateLimitedMessage: "Too many messages right now — wait a moment and retry.",
   notConfiguredMessage:
-    "The assistant isn't configured yet — add AI_API_KEY to .env.local.",
+    "The assistant isn't configured yet — set AI_API_KEY (standalone mode) or LLM_API_KEY on the backend (hosted mode) in your deployment environment.",
   fullscreenLabel: "Expand to full screen",
   exitFullscreenLabel: "Exit full screen",
 } as const;
