@@ -6,7 +6,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from app.api.routes import chat, health, ingest
+from app.api.routes import chat, health, ingest, keepalive
 from app.core.config import get_settings
 
 logging.basicConfig(
@@ -29,6 +29,8 @@ def create_app() -> FastAPI:
     app.include_router(health.router)  # convenience: /health
     app.include_router(chat.router, prefix="/api")
     app.include_router(ingest.router, prefix="/api")
+    app.include_router(keepalive.router, prefix="/api")
+    app.include_router(keepalive.router)  # convenience: /keepalive
 
     @app.exception_handler(RequestValidationError)
     async def _validation_error(request: Request, exc: RequestValidationError) -> JSONResponse:

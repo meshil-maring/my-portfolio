@@ -1,30 +1,30 @@
-name: API Health Check
+name: API Keep-Alive
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "* * * * *"
   workflow_dispatch:
 
 jobs:
-  health:
+  keepalive:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - name: Ping health endpoint
+      - name: Ping keep-alive endpoint (touches Supabase)
         env:
-          API_HEALTH_URL: ${{ secrets.API_HEALTH_URL }}
+          API_KEEPALIVE_URL: ${{ secrets.API_KEEPALIVE_URL }}
         run: |
-          if [ -z "$API_HEALTH_URL" ]; then
-            echo "API_HEALTH_URL secret is not set" >&2
+          if [ -z "$API_KEEPALIVE_URL" ]; then
+            echo "API_KEEPALIVE_URL secret is not set" >&2
             exit 1
           fi
           for i in 1 2 3; do
-            if curl -fsS --max-time 30 "$API_HEALTH_URL" -o /tmp/health.json; then
-              cat /tmp/health.json
+            if curl -fsS --max-time 30 "$API_KEEPALIVE_URL" -o /tmp/keepalive.json; then
+              cat /tmp/keepalive.json
               exit 0
             fi
             echo "attempt $i failed; retrying in 5s" >&2
             sleep 5
           done
-          echo "health endpoint unreachable" >&2
+          echo "keep-alive endpoint unreachable" >&2
           exit 1
