@@ -10,7 +10,7 @@ import { DiscussProject } from "@/components/sections/DiscussProject";
 import { RecruitmentInquiry } from "@/components/sections/RecruitmentInquiry";
 import { Contact } from "@/components/sections/Contact";
 
-// design-system §07 §19: nav → hero → work → services → skills → about → process → discuss → contact → footer
+// design-system section 07: nav -> hero -> work -> services -> skills -> about -> process -> discuss -> recruitment -> contact -> footer
 export default function Home() {
   return (
     <div className="flex min-h-full flex-col">
@@ -23,10 +23,10 @@ export default function Home() {
         <About />
         <Process />
         <DiscussProject />
+        <RecruitmentInquiry />
         <Contact />
       </main>
       <Footer />
     </div>
   );
 }
-
