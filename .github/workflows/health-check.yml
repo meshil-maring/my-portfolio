@@ -2,14 +2,29 @@ name: API Health Check
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 jobs:
   health:
     runs-on: ubuntu-latest
+    timeout-minutes: 2
     steps:
       - name: Ping health endpoint
+        env:
+          API_HEALTH_URL: ${{ secrets.API_HEALTH_URL }}
         run: |
-          curl -fsS "${{ secrets.API_HEALTH_URL }}" -o /tmp/health.json
-          cat /tmp/health.json
+          if [ -z "$API_HEALTH_URL" ]; then
+            echo "API_HEALTH_URL secret is not set" >&2
+            exit 1
+          fi
+          for i in 1 2 3; do
+            if curl -fsS --max-time 30 "$API_HEALTH_URL" -o /tmp/health.json; then
+              cat /tmp/health.json
+              exit 0
+            fi
+            echo "attempt $i failed; retrying in 5s" >&2
+            sleep 5
+          done
+          echo "health endpoint unreachable" >&2
+          exit 1

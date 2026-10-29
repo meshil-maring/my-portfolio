@@ -73,3 +73,21 @@ direct browser→FastAPI alternative.
 - Without embeddings/DB configured, chat still answers from whatever
   `profile_sections` exists (or degrades gracefully) — but seed first.
 - Re-ingesting after editing `seed/portfolio.json` is idempotent (hash dedupe).
+## Keeping Render awake (24/7)
+
+Render free web services sleep after 15 minutes of inactivity. This repo
+includes a GitHub Actions workflow (`.github/workflows/health-check.yml`)
+that pings the backend health endpoint every 10 minutes.
+
+Setup:
+
+1. Deploy the backend to Render.
+2. In GitHub → Settings → Secrets and variables → Actions, add:
+   - `API_HEALTH_URL` = `https://<your-render-service>.onrender.com/api/health`
+3. (Optional but recommended) Add a second free monitor (UptimeRobot,
+   cron-job.org) pinging the same URL every 5–10 minutes as a backup, since
+   GitHub scheduled workflows can be paused after long repo inactivity.
+
+The health endpoint (`GET /api/health` and `GET /health`) always returns
+`200` while the process is up, so it is safe to use as a keep-alive target.
+
